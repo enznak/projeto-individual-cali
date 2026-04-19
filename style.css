@@ -1,0 +1,34 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: beige;
+}
+
+.container {}
+
+.header {
+    display: flex;
+    height: 100px;
+    background-color: black;
+    color: white;
+    position: sticky;
+    top: 0;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20%;
+}
+
+.pages {
+    display: flex;
+    gap: 40px;
+}
+
+.pages a {
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+}

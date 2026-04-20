@@ -1,0 +1,80 @@
+.text {
+    display: flex;
+    position: absolute;
+    left: 15%;
+    top: 35%;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.text h1 {
+    color: white;
+    font-size: 70px;
+}
+
+.text h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: lighter;
+}
+
+.text button {
+    width: 15%;
+    padding: 14px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #7C4DFF;
+    color: white;
+    border: 0;
+}
+
+.text button:hover {
+    background-color: #6A3EF0;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.text button:active {
+    background-color: #592FD1;
+}
+
+.main a {
+    text-decoration: none;
+    color: black;
+}
+
+.main {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url(/img/111.JPG);
+    background-size: cover;
+}
+
+.main2 {
+    background-color: #0F1113;
+    min-height: calc(100vh - 80px);
+}
+
+.card {
+    position: relative;
+    left: 10%;
+    width: 500px;
+    height: 500px;
+    background-color: white;
+}
+
+.int {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: white;
+}
+
+.int h1 {
+    color: black;
+}
+
+.int p {
+    color: black;
+}

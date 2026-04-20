@@ -5,30 +5,62 @@
 }
 
 body {
-    background-color: beige;
+    background-color: white;
 }
 
-.container {}
+html {
+    scroll-behavior: smooth;
+}
 
 .header {
     display: flex;
-    height: 100px;
-    background-color: black;
+    height: 80px;
+    background-color: #14181B;
     color: white;
     position: sticky;
     top: 0;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding-right: 20%;
+    z-index: 1000;
+    padding-left: 20%;
+}
+
+.header img {
+    position: relative;
+    width: 70px;
+    height: 70px;
 }
 
 .pages {
     display: flex;
-    gap: 40px;
+    gap: 28px;
 }
 
 .pages a {
     text-decoration: none;
     color: white;
-    font-size: 30px;
+    font-size: 16px;
+    padding: 12px;
+}
+
+.pages a:hover {
+    color: #6A3EF0;
+    transition: color 0.3s ease;
+}
+
+.login {
+    background-color: #7C4DFF;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+.login:hover {
+    background-color: #6A3EF0;
+    color: white
+}
+
+.main {
+    background-color: #0F1113;
+    min-height: calc(100vh - 80px);
 }

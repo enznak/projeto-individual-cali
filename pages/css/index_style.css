@@ -28,6 +28,8 @@
     background-color: #7C4DFF;
     color: white;
     border: 0;
+    box-shadow: 0 0px 30px rgba(124, 77, 255, 0.34);
+    color: white;
 }
 
 .text button:hover {
@@ -42,12 +44,12 @@
 
 .main a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
-.main {
+.main-page {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url(/img/111.JPG);
+        url(/pages/img/111.JPG);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

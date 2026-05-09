@@ -1,3 +1,11 @@
+.main-page {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url(../img/blogpg.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .main {
     display: flex;
     justify-content: center;
@@ -7,25 +15,27 @@
 
 .card {
     display: flex;
-    width: 500px;
+    width: 450px;
     height: 600px;
-    background-color: #191E22;
+    background: linear-gradient(rgba(18, 22, 37, 0.88), rgba(11, 14, 24, 0.92));
+    border: 1px solid rgba(255, 255, 255, 0.1);
     align-items: center;
     border-radius: 20px;
     flex-direction: column;
-    padding-top: 100px;
+    padding-top: 80px;
+    backdrop-filter: blur(16px);
 }
 
 .card h1 {
     color: white;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .form {
     display: flex;
     flex-direction: column;
     width: 80%;
-    gap: 20px;
+    gap: 24px;
 }
 
 .form input {
@@ -33,6 +43,9 @@
     border-radius: 14px;
     padding-left: 50px;
     font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
 .form input::placeholder {
@@ -40,17 +53,24 @@
 
 .form input:focus {
     outline: none;
+    border: 1px solid #7C4DFF;
+}
+
+.form a {
+    text-decoration: none;
+    color: #cab7ff;
+    align-self: flex-end;
 }
 
 .user {
-    background: url(/img/user.png) no-repeat left;
+    background: url(../img/user.png) no-repeat left;
     background-size: 16px;
     background-position: 20px center;
     background-color: white;
 }
 
 .password {
-    background: url(/img/password.png) no-repeat left;
+    background: url(../img/password.png) no-repeat left;
     background-size: 16px;
     background-position: 20px center;
     background-color: white;
@@ -70,7 +90,8 @@
     font-size: 20px;
     font-weight: bold;
     border: 0;
-    margin-top: 50px;
+    box-shadow: 0 0 20px rgba(124, 77, 255, 0.34);
+    color: white;
 }
 
 .form button:hover {

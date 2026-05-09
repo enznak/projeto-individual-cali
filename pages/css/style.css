@@ -15,7 +15,8 @@ html {
 .header {
     display: flex;
     height: 80px;
-    background-color: #14181B;
+    backdrop-filter: blur(16px);
+    background: rgba(7, 11, 20, 0.82);
     color: white;
     position: sticky;
     top: 0;
@@ -34,7 +35,7 @@ html {
 
 .pages {
     display: flex;
-    gap: 28px;
+    gap: 16px;
 }
 
 .pages a {
@@ -45,22 +46,30 @@ html {
 }
 
 .pages a:hover {
-    color: #6A3EF0;
+    color: #a487f8;
     transition: color 0.3s ease;
 }
 
 .login {
-    background-color: #7C4DFF;
-    border-radius: 20px;
-    margin-left: 10px;
+    font-weight: bold;
+    font-size: 16px;
 }
 
-.login:hover {
-    background-color: #6A3EF0;
-    color: white
+.login a {
+    text-decoration: none;
+    color: white;
+    padding: 12px;
+    background-color: #7C4DFF;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(124, 77, 255, 0.34);
+}
+
+.login a:hover {
+    background-color: #592FD1;
+    color: white;
+    transition: background-color 0.3s;
 }
 
 .main {
-    background-color: #0F1113;
     min-height: calc(100vh - 80px);
 }

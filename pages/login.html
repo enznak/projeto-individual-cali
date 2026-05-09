@@ -11,28 +11,34 @@
 </head>
 
 <body>
-    <div class="header">
-        <a href="./index.html"><img src="./img/logo_arise.png" alt=""></a>
-        <div class="pages">
-            <a href="./index.html">HOME</a>
-            <a href="./blog.html">BLOG</a>
-            <a href="./exercicio.html">EXERCÍCIOS</a>
-            <a href="./sobre.html">SOBRE MIM</a>
-            <a href="./login.html" class="login">ENTRAR</a>
+    <div class="main-page">
+        <div class="header">
+            <a href="./index.html"><img src="./img/logo_arise.png" alt=""></a>
+            <div class="pages">
+                <a href="./index.html">HOME</a>
+                <a href="./blog.html">BLOG</a>
+                <a href="./exercicio.html">EXERCÍCIOS</a>
+                <a href="./sobre.html">SOBRE MIM</a>
+            </div>
+            <div class="login">
+                <a href="./login.html">ENTRAR</a>
+            </div>
         </div>
-    </div>
 
-    <div class="main">
-        <div id="login" class="card">
-            <h1>Entrar na conta</h1>
-            <div class="form">
-                <span>E-mail:<span style="color: red;"> *</span></span>
-                <input id="email_input" class="user" type="text" placeholder="Digite o seu e-mail">
+        <div class="main">
+            <div id="login" class="card">
+                <h1>Bem-vindo(a)</h1>
+                <div class="form">
+                    <span>Nome de usuário</span>
+                    <input id="email_input" class="user" type="text" placeholder="Digite o seu nome de usuário">
 
-                <span>Senha:<span style="color: red;"> *</span></span> Esqueceu a senha?
-                <input id="senha_input" class="password" type="text" placeholder="Digite sua senha">
+                    <span>Senha</span>
+                    <input id="senha_input" class="password" type="text" placeholder="Digite sua senha">
+                    <a href="">Esqueceu a senha?</a>
 
-                <button onclick="entrar()">ENTRAR</button>
+                    <button onclick="entrar()">ENTRAR</button>
+                    <span>Ainda não possui acesso? <a href="./cadastro.html">Criar conta</a></span>
+                </div>
             </div>
         </div>
     </div>

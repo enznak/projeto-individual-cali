@@ -29,19 +29,33 @@
             <div class="card">
                 <h1>Cadastre-se</h1>
                 <div class="form">
-                    <span>Nome de usuário</span>
+                    <label>Nome de usuário</label>
                     <input id="nome_input" type="text" placeholder="Digite o seu nome de usuário" class="user">
+                    <span id="nm_erro0" class="erro"></span>
+                    <span id="nm_erro1" class="erro"></span>
+                    <span id="nm_erro2" class="erro"></span>
 
-                    <span>E-mail</span>
+                    <label>E-mail</label>
                     <input id="email_input" type="text" placeholder="email@exemplo.com">
+                    <span id="em_erro0" class="erro"></span>
+                    <span id="em_erro1" class="erro"></span>
+                    <span id="em_erro2" class="erro"></span>
 
-                    <span>Senha</span>
+
+                    <label>Senha</label>
                     <input id="senha_input" type="text" placeholder="Digite sua senha" class="password">
+                    <span id="sn_erro0" class="erro"></span>
+                    <span id="sn_erro1" class="erro"></span>
+                    <span id="sn_erro2" class="erro"></span>
 
-                    <span>Confirmar a senha</span>
-                    <input id="senha_input2" type="text" placeholder="Digite sua senha novamente">
 
-                    <button onclick="cadastrar()">Cadastrar</button>
+                    <label>Confirmar a senha</label>
+                    <input id="senha2_input" type="text" placeholder="Digite sua senha novamente">
+                    <span id="sn2_erro0" class="erro"></span>
+                    <span id="sn2_erro1" class="erro"></span>
+                    <span id="sn2_erro2" class="erro"></span>
+
+                    <button onclick="; limpar(); validar()">Cadastrar</button>
                     <span>Já possui acesso? <a href="./login.html">Entrar na conta</a></span>
                 </div>
             </div>
@@ -56,6 +70,54 @@
     </div>
 </body>
 <script>
+    function validar() {
+        let form = {
+            nm: nome_input.value,
+            em: email_input.value,
+            sn: senha_input.value,
+            sn2: senha2_input.value
+        }
+
+        let erro = false
+        if (form.nm == "" || form.nm.length > 30 || form.nm.length < 3) {
+            erro = true
+            nm_erro0.style.display = 'block'
+            if (form.nm == "") {
+                nm_erro0.innerHTML = `Insira o nome de usuário.`
+            } if (form.nm.length > 30) {
+                nm_erro0.innerHTML = `O nome de usuário não pode ter mais de 30 caracteres.`
+            } if (form.nm.length < 3 && !form.nm == null) {
+                nm_erro0.innerHTML = `O nome de usuário precisa ter pelo menos 3 caracteres.`
+            }
+        } if (form.em == "" || form.em.length > 320 || form.em.length < 4 || !form.em.includes("@") || !form.em.includes(".")) {
+            erro = true
+            em_erro0.style.display = 'block'
+            em_erro0.innerHTML = `Insira um e-mail válido.`
+        } if (form.sn == "" || form.sn.length > 100 || form.sn.length < 8) {
+            erro = true
+            sn_erro0.style.display = 'block'
+            if (form.sn == "") {
+                sn_erro0.innerHTML = `Insira uma senha.`
+            } if (form.sn.length > 100) {
+                sn_erro0.innerHTML = `A senha não pode ter mais de 100 caracteres.`
+            } if (form.sn.length < 8 && !form.sn == null) {
+                sn_erro0.innerHTML = `A senha precisa ter pelo menos 8 caracteres.`
+            }
+        } if (form.sn2 == "" || form.sn2 != form.sn) {
+            erro = true
+            sn2_erro0.style.display = 'block'
+            if (form.sn2 == "") {
+                sn2_erro0.innerHTML = `Insira a senha novamente.`
+            } if (form.sn2 != form.sn) {
+                sn2_erro0.innerHTML = `As senhas precisam ser iguais.`
+            }
+        }
+
+        if (!erro) {
+            cadastrar()
+        }
+    }
+
     function cadastrar() {
         var nomeVar = nome_input.value;
         var emailVar = email_input.value;
@@ -91,6 +153,21 @@
             });
 
         return false;
+    }
+
+    function limpar() {
+        nm_erro0.style.display = 'none'
+        nm_erro1.style.display = 'none'
+        nm_erro2.style.display = 'none'
+        em_erro0.style.display = 'none'
+        em_erro1.style.display = 'none'
+        em_erro2.style.display = 'none'
+        sn_erro0.style.display = 'none'
+        sn_erro1.style.display = 'none'
+        sn_erro2.style.display = 'none'
+        sn2_erro0.style.display = 'none'
+        sn2_erro1.style.display = 'none'
+        sn2_erro2.style.display = 'none'
     }
 </script>
 

@@ -75,6 +75,13 @@
     color: white;
     font-size: 16px;
     margin-top: 20px;
+    align-self: center;
+}
+
+.form label {
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
 }
 
 .form button {
@@ -103,4 +110,8 @@
     text-decoration: none;
     color: #cab7ff;
     align-self: flex-end;
+}
+
+.erro {
+    display: none;
 }

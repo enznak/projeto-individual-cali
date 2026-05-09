@@ -110,3 +110,7 @@
 .form button:active {
     background-color: #592FD1;
 }
+
+.erro {
+    display: none;
+}

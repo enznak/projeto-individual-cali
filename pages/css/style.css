@@ -12,7 +12,7 @@ html {
     scroll-behavior: smooth;
 }
 
-.header {
+.navbar-container {
     display: flex;
     height: 80px;
     backdrop-filter: blur(16px);
@@ -27,25 +27,25 @@ html {
     padding-left: 20%;
 }
 
-.header img {
+.navbar-container img {
     position: relative;
     width: 70px;
     height: 70px;
 }
 
-.pages {
+.navbar {
     display: flex;
     gap: 16px;
 }
 
-.pages a {
+.navbar a {
     text-decoration: none;
     color: white;
     font-size: 16px;
     padding: 12px;
 }
 
-.pages a:hover {
+.navbar a:hover {
     color: #a487f8;
     transition: color 0.3s ease;
 }

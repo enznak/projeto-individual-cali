@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arise | Login</title>
+
+    <script src="./sessao.js"></script>
+
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/login_style.css">
     <link rel="icon" href="./img/logo_arise.png">
@@ -12,16 +15,17 @@
 
 <body>
     <div class="main-page">
-        <div class="header">
+        <div class="navbar-container">
             <a href="./index.html"><img src="./img/logo_arise.png" alt=""></a>
-            <div class="pages">
+            <div class="navbar">
                 <a href="./index.html">HOME</a>
                 <a href="./blog.html">BLOG</a>
                 <a href="./exercicio.html">EXERCÍCIOS</a>
                 <a href="./sobre.html">SOBRE MIM</a>
             </div>
             <div class="login">
-                <a href="./login.html">ENTRAR</a>
+                <a href="./login.html" id="div_visitante">ENTRAR</a>
+                <a href="./user/dashboard.html" id="div_usuario" style="display: none;">MINHA CONTA</a>
             </div>
         </div>
 

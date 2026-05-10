@@ -1,4 +1,4 @@
-.bar {
+.deck-container {
     display: flex;
     position: fixed;
     justify-content: center;
@@ -13,7 +13,7 @@
     border-radius: 10px;
 }
 
-.nav {
+.deck {
     display: flex;
     justify-content: space-evenly;
     align-items: center;

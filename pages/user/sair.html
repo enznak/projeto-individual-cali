@@ -7,7 +7,7 @@
     <title>Arise | Calistenia</title>
 
      <script src="../sessao.js"></script>
-
+     
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="./css/user_style.css">
     <link rel="stylesheet" href="./css/">
@@ -18,23 +18,23 @@
 
 <body>
     <div class="main-page">
-        <div class="navbar-container">
+        <div class="header">
             <a href="../index.html"><img src="../img/logo_arise.png" alt=""></a>
-            <div class="navbar">
+            <div class="pages">
                 <a href="../index.html">HOME</a>
                 <a href="../blog.html">BLOG</a>
                 <a href="../exercicio.html">EXERCÍCIOS</a>
                 <a href="../sobre.html">SOBRE MIM</a>
             </div>
             <div class="login">
-                <a href="../login.html">ENTRAR</a>
+                <a href="./login.html">ENTRAR</a>
             </div>
         </div>
 
-        <div class="deck-container">
-            <div class="deck">
-                <a class="item" href="./quizz.html"><img src="../img/quiz.png" alt=""></a>
+        <div class="bar">
+            <div class="nav">
                 <a class="item" href="./arvore.html"><img src="../img/tree.png" alt=""></a>
+                <a class="item" href="./quizz.html"><img src="../img/quiz.png" alt=""></a>
                 <a class="item" href="./dashboard.html"><img src="../img/graph.png" alt=""></a>
                 <a class="item" href="./perfil.html"><img src="../img/user2.png" alt=""></a>
                 <a class="item" href="./sair.html"><img src="../img/logout.png" alt=""></a>
@@ -48,27 +48,3 @@
     </div>
 
 </body>
-<script>
-    const ctx = document.getElementById('myChart');
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
-
-</html>

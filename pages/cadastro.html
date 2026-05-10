@@ -143,8 +143,8 @@
                 if (resposta.ok) {
 
                 } else {
-                    nm_erro0.style.display = 'block'
-                    em_erro0.style.display = 'block'
+                    sn2_erro0.style.display = 'block'
+                    sn2_erro0.innerHTML = `Nome de usuário ou e-mail inválidos.`
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })

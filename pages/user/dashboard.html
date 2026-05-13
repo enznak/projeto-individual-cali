@@ -42,17 +42,42 @@
             </div>
         </div>
         <div class="main">
-            <div class="card">
-                <div> <canvas class="chart1" id="myChart"></canvas> </div>
-            </div>
-            <div class="card">
-                <div> <canvas class="chart2" id="myChart"></canvas> </div>
-            </div>
-            <div class="card">
-                <div> <canvas class="chart3" id="myChart"></canvas> </div>
-            </div>
-            <div class="card">
-                <div> <canvas class="chart4" id="myChart"></canvas> </div>
+            <h2>DASHBOARD <span style="color: rgb(146, 146, 146);">/</span> </h2>
+            <div class="dashboard">
+                <div class="card card1">
+                    <div class="kpi-box">Categoria <p>Atleta <span>Estático</span></p>
+                    </div>
+                </div>
+                <div class="card card2">
+                    <div class="kpi-box">Classificação atual <p>Nível <span>Elite</span></p>
+                    </div>
+                </div>
+                <div class="card card3">
+                    <div class="kpi-box">Movimentos desbloqueados <p><span>15</span> Ativos</p>
+                    </div>
+                </div>
+                <div class="card card4">
+                    <div class="chart-box"> <canvas class="chart4" id="myChart"></canvas> </div>
+                </div>
+                <div class="card card5">
+                    <div class=""> Próximas metas <p>Push</p> <span>Planche</span>
+                        <p>Pull</p><span>Front-Lever</span>
+                        <p>Balance</p><span>Flag</span>
+                    </div>
+                </div>
+                <div class="card card6">
+                    <div class="kpi-box">Quizzes realizados<p><span>3</span></p>
+                    </div>
+                </div>
+                <div class="card card7">
+                    <div class="kpi-box">Taxa de acerto (quizzes de conhecimento) <p><span>82%</span></p>
+                    </div>
+                </div>
+                <div class="card card8">
+                    <div class="kpi-box">Tempo de treino<p><span>12 </span>horas semanais <br> <span>2 </span>anos <br> <span>1248h </span>aproximadamente</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -60,8 +85,8 @@
 </body>
 <script>
     const ctx = document.getElementById('myChart');
-    
-        const data = {
+
+    const data = {
         labels: [
             'Estático',
             'Dinâmico',
@@ -71,7 +96,7 @@
         ],
         datasets: [{
             label: 'Pontos',
-            data: [3, 3, 3, 3, 3],
+            data: [8, 4, 7, 4, 0],
             fill: true,
             backgroundColor: 'rgba(124, 77, 255, 0.5)',
             borderColor: 'rgb(124, 77, 255)',
@@ -79,12 +104,31 @@
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgb(255, 99, 132)'
+
         }]
     };
     const config = {
         type: 'radar',
         data: data,
         options: {
+            scales: {
+                r: {
+                    min: 0,
+                    max: 10,
+                    ticks: {
+                        display: false
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.25)'
+                    },
+                    angleLines: {
+                        color: 'rgba(255, 255, 255, 0.25)'
+                    },
+                    pointLabels: {
+                        color: '#ffffff'
+                    }
+                }
+            },
             elements: {
                 line: {
                     borderWidth: 3

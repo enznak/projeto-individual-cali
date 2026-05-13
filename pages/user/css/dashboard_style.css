@@ -4,17 +4,146 @@
     background: #111315;
 }
 
-.main {
-    display: flex;
+.dashboard {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 150px 600px 300px;
+    grid-template-areas:
+        "chart1 chart1 chart1 chart1 chart2 chart2 chart2 chart2 chart3 chart3 chart3 chart3"
+        "chart4 chart4 chart4 chart4 chart4 chart4 chart4 chart4 chart5 chart5 chart5 chart5"
+        "chart6 chart6 chart6 chart7 chart7 chart7 chart8 chart8 chart8 chart8 chart8 chart8";
+    gap: 16px;
 }
 
-.chart1 {
+.card1 {
+    grid-area: chart1;
     display: flex;
-    width: 100px;
-    height: 100px;
+    padding: 40px;
+    padding-top: 25px;
 }
+
+.card2 {
+    grid-area: chart2;
+    display: flex;
+    padding: 40px;
+    padding-top: 25px;
+}
+
+.card3 {
+    grid-area: chart3;
+    display: flex;
+    padding: 40px;
+    padding-top: 25px;
+}
+
+.card4 {
+    grid-area: chart4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card5 {
+    grid-area: chart5;
+    display: flex;
+    font-size: 16px;
+    color: #636363;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.card5 p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    position: relative;
+    margin-top: 60px;
+    margin-bottom: 10px;
+}
+
+.card5 span {
+    font-size: 40px;
+    color: #7C4DFF;
+    margin-bottom: 5000px;
+}
+
+.card6 {
+    grid-area: chart6;
+    padding: 40px;
+}
+
+.card7 {
+    grid-area: chart7;
+    padding: 40px;
+}
+
+.card8 {
+    grid-area: chart8;
+    padding: 40px;
+}
+
+.card8 p {
+    margin-bottom: 20px;
+}
+
+.chart1 {}
 
 canvas {
-    width: 200px;
-    height: 200px;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.card {
+    background-color: #171A1F;
+    border: 0px solid #2A2F3A;
+}
+
+.chart-box {
+    min-width: 500px;
+    min-height: 500px;
+}
+
+.kpi-box {
+    display: flex;
+    font-size: 16px;
+    color: #636363;
+    flex-direction: column;
+}
+
+.kpi-box p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    position: relative;
+    top: 16px;
+}
+
+.kpi-box span {
+    font-size: 40px;
+    color: #7C4DFF;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 300px;
+    padding-right: 300px;
+    padding-bottom: 100px;
+}
+
+.main h1 {
+    color: white;
+    position: relative;
+    margin-top: 50px;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.main h2 {
+    color: white;
+    margin-top: 50px;
+    font-weight: 700;
+    margin-bottom: 50px;
 }

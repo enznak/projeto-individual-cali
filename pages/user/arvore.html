@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arise | Calistenia</title>
 
-     <script src="../sessao.js"></script>
+    <script src="../sessao.js"></script>
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="./css/user_style.css">
-    <link rel="stylesheet" href="./css/">
+    <link rel="stylesheet" href="./css/arvore_style.css">
     <link rel="icon" href="../img/logo_arise.png">
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body>
-    <div class="main-page">
+    <div class="container">
         <div class="navbar-container">
             <a href="../index.html"><img src="../img/logo_arise.png" alt=""></a>
             <div class="navbar">
@@ -31,20 +31,141 @@
             </div>
         </div>
 
-        <div class="deck-container">
-            <div class="deck">
+        <div class="dock-container">
+            <div class="dock">
                 <a class="item" href="./quizz.html"><img src="../img/quiz.png" alt=""></a>
-                <a class="item" href="./arvore.html"><img src="../img/tree.png" alt=""></a>
+                <a class="item" style="background-color: #592FD1;" href="./arvore.html"><img src="../img/tree.png"
+                        alt=""></a>
                 <a class="item" href="./dashboard.html"><img src="../img/graph.png" alt=""></a>
                 <a class="item" href="./perfil.html"><img src="../img/user2.png" alt=""></a>
                 <a class="item" href="./sair.html"><img src="../img/logout.png" alt=""></a>
             </div>
         </div>
-        <div class="card">
-            <div>
-                <canvas id="myChart"></canvas>
+
+        <div class="banner-main" id="banners">
+            <div class="banner">
+                <button onclick="arvoreEstatico()"></button>
+            </div>
+
+            <div class="banner">
+                <button onclick="arvoreDinamico()"></button>
             </div>
         </div>
-    </div>
+
+        <div class="esta-main" id="esta" style="display: none;">
+            <div class="arvore">
+                <div class="nivel">
+                    <button>
+                        <h1>Push-up</h1>
+                    </button>
+                    <button>
+                        <h1>Dip</h1>
+                    </button>
+                    <button>
+                        <h1>Pseudo Planche</h1>
+                    </button>
+                    <button>
+                        <h1>Tuck Planche</h1>
+                    </button>
+                    <button>
+                        <h1>Straddle Planche</h1>
+                    </button>
+                    <button>
+                        <h1>Planche</h1>
+                    </button>
+                </div>
+                <div class="nivel">
+                    <button>
+                        <h1>Pull-up</h1>
+                    </button>
+                    <button>
+                        <h1>Tuck FL</h1>
+                    </button>
+                    <button>
+                        <h1>Adv. Tuck FL</h1>
+                    </button>
+                    <button>
+                        <h1>Half-lay FL</h1>
+                    </button>
+                    <button>
+                        <h1>Front-lever</h1>
+                    </button>
+                </div>
+                <div class="nivel">
+                    <button></button>
+                    <button></button>
+                    <button>
+                        <h1>One-arm Handstand</h1>
+                    </button>
+                </div>
+            </div>
+            <div class="arvore">
+                <div class="nivel">
+                    <button>
+                        <h1>Pull-up</h1>
+                    </button>
+                    <button>
+                        <h1>Tuck FL</h1>
+                    </button>
+                    <button>
+                        <h1>Adv. Tuck FL</h1>
+                    </button>
+                    <button>
+                        <h1>Half-lay FL</h1>
+                    </button>
+                    <button>
+                        <h1>Front-lever</h1>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="dina-main" id="dina" style="display: none;">
+            <div class="arvore">
+                <div class="line-arvore">
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                </div>
+                <div class="line-arvore">
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                </div>
+                <div class="line-arvore">
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                </div>
+            </div>
+        </div>
 
 </body>
+
+<script>
+    function arvoreEstatico() {
+        banners.style.display = 'none'
+        esta.style.display = 'block'
+    }
+    function arvoreDinamico() {
+        banners.style.display = 'none'
+        dina.style.display = 'block'
+    }
+    function arvoreCarga() {
+        banners.style.display = 'none'
+        carg.style.display = 'block'
+    }
+    function arvoreRepeticao() {
+        banners.style.display = 'none'
+        repe.style.display = 'block'
+    }
+    function arvoreFuncional() {
+        banners.style.display = 'none'
+        func.style.display = 'block'
+    }
+
+    function voltar() {
+
+    }
+</script>

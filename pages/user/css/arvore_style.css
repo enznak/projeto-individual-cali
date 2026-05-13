@@ -1,0 +1,58 @@
+.container {
+    max-width: 100%;
+    min-height: 100vh;
+    background: #111315;
+}
+
+.banner-main {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 80vh;
+}
+
+.banner button {
+    height: 600px;
+    width: 275px;
+    cursor: pointer;
+    background-color: black;
+    border: 0;
+}
+
+.banner button:hover {
+    box-shadow: 0 0 30px black;
+    background-color: black;
+    transition: box-shadow 0.3s;
+}
+
+.esta-main {
+}
+
+.arvore button {
+    width: 100px;
+    height: 105px;
+    cursor: pointer;
+    background-color: black;
+    border: 0;
+    color: white;
+}
+
+.arvore button:hover {
+    box-shadow: 0 0 30px black;
+    transition: box-shadow 0.3s;
+}
+
+.arvore {
+    position: relative;
+    top: 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 200px;
+}
+
+.nivel {
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+}

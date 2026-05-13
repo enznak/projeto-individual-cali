@@ -1,9 +1,9 @@
-.deck-container {
+.dock-container {
     display: flex;
     position: fixed;
     justify-content: center;
     align-items: center;
-    bottom: 100px;
+    bottom: 50px;
     height: 80px;
     width: 500px;
     left: 50%;
@@ -11,9 +11,10 @@
     backdrop-filter: blur(16px);
     background: rgba(7, 11, 20, 0.82);
     border-radius: 10px;
+    z-index: 1000;
 }
 
-.deck {
+.dock {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -30,23 +31,11 @@
 }
 
 .item:hover {
-    background-color: #7C4DFF;
+    background-color: rgba(89, 47, 209, 0.5);
     transition: background-color 0.3s ease;
 }
 
 .item img {
     width: 25%;
     height: 30%;
-}
-
-.main-page {
-    width: 100%;
-    min-height: 100vh;
-    background: #111315;
-}
-
-.card {
-    background: #171A1F;
-    width: 500px;
-    height: 300px;
 }

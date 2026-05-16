@@ -24,7 +24,7 @@
                 <a href="../index.html">HOME</a>
                 <a href="../blog.html">BLOG</a>
                 <a href="../exercicio.html">EXERCÍCIOS</a>
-                <a href="../sobre.html">SOBRE MIM</a>
+                <a href="../sobre.html">SOBRE</a>
             </div>
             <div class="login">
                 <a href="../login.html">ENTRAR</a>
@@ -35,9 +35,8 @@
             <div class="dock">
                 <a class="item" href="./quizz.html"><img src="../img/quiz.png" alt=""></a>
                 <a class="item" href="./arvore.html"><img src="../img/tree.png" alt=""></a>
-                <a class="item" style="background-color: #592FD1;" href="./dashboard.html"><img src="../img/graph.png"
+                <a class="item" style="background-color: #6A3EF0;" href="./dashboard.html"><img src="../img/graph.png"
                         alt=""></a>
-                <a class="item" href="./perfil.html"><img src="../img/user2.png" alt=""></a>
                 <a class="item" href="./sair.html"><img src="../img/logout.png" alt=""></a>
             </div>
         </div>
@@ -45,15 +44,15 @@
             <h2>DASHBOARD <span style="color: rgb(146, 146, 146);">/</span> </h2>
             <div class="dashboard">
                 <div class="card card1">
-                    <div class="kpi-box">Categoria <p>Atleta <span>Estático</span></p>
+                    <div class="kpi-box">Categoria <p>Atleta <span id="kpi_cat">Estático</span></p>
                     </div>
                 </div>
                 <div class="card card2">
-                    <div class="kpi-box">Classificação atual <p>Nível <span>Elite</span></p>
+                    <div class="kpi-box">Classificação atual <p>Nível <span id="kpi_class">Elite</span></p>
                     </div>
                 </div>
                 <div class="card card3">
-                    <div class="kpi-box">Movimentos desbloqueados <p><span>15</span> Ativos</p>
+                    <div class="kpi-box">Movimentos desbloqueados <p><span id="kpi_mov">15</span> Ativos</p>
                     </div>
                 </div>
                 <div class="card card4">
@@ -88,6 +87,7 @@
 <script>
     var idUsuario = sessionStorage.ID_USUARIO;
     window.onload = obterDadosGrafico(idUsuario);
+    window.onload = obterDadosKpi(idUsuario);
 
     // O gráfico é construído com três funções:
     // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
@@ -203,68 +203,28 @@
         let myChart = new Chart(ctx, config);
     }
 
-
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas,
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-
-    /* OAODSADIJASJID
-
-    const ctx = document.getElementById('myChart');
-
-    const data = {
-        labels: [
-            'Estático',
-            'Dinâmico',
-            'Carga',
-            'Repetição',
-            'Funcional',
-        ],
-        datasets: [{
-            label: 'Pontos',
-            data: [8, 4, 7, 4, 0],
-            fill: true,
-            backgroundColor: 'rgba(124, 77, 255, 0.5)',
-            borderColor: 'rgb(124, 77, 255)',
-            pointBackgroundColor: 'rgb(124, 77, 255)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgb(255, 99, 132)'
-
-        }]
-    };
-    const config = {
-        type: 'radar',
-        data: data,
-        options: {
-            scales: {
-                r: {
-                    min: 0,
-                    max: 10,
-                    ticks: {
-                        display: false
-                    },
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.25)'
-                    },
-                    angleLines: {
-                        color: 'rgba(255, 255, 255, 0.25)'
-                    },
-                    pointLabels: {
-                        color: '#ffffff'
-                    }
-                }
-            },
-            elements: {
-                line: {
-                    borderWidth: 3
-                }
+    function obterDadosKpi(idUsuario) {
+        fetch(`/dashboard/kpi-indicadores/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(resposta)
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    plotarKpi(resposta, idUsuario);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
             }
-        },
-    };
-    new Chart(ctx, config); */
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function plotarKpi(resposta, idUsuario) {
+        kpi_cat.innerHTML = resposta
+        kpi_class.innerHTML = resposta
+        kpi_mov.innerHTML = resposta
+    }
 </script>
 
 </html>

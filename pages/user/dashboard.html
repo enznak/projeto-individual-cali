@@ -86,11 +86,8 @@
 
 </body>
 <script>
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
-    let proximaAtualizacao;
-
-    window.onload = obterDadosGrafico(item.id);
+    var idUsuario = sessionStorage.ID_USUARIO;
+    window.onload = obterDadosGrafico(idUsuario);
 
     // O gráfico é construído com três funções:
     // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
@@ -104,21 +101,12 @@
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
     function obterDadosGrafico(idUsuario) {
-
-        alterarTitulo(idUsuario)
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
-        fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/dashboard/pontos-categoria/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
+                    console.log(resposta)
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
                     plotarGrafico(resposta, idUsuario);
-
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -132,7 +120,7 @@
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idAquario) {
+    function plotarGrafico(resposta, idUsuario) {
 
         console.log('iniciando plotagem do gráfico...');
 
@@ -150,7 +138,13 @@
             ],
             datasets: [{
                 label: 'Pontos',
-                data: [8, 4, 7, 4, 0],
+                data: [
+                    resposta.estatico,
+                    resposta.dinamico,
+                    resposta.carga,
+                    resposta.repeticao,
+                    resposta.funcional
+                ],
                 fill: true,
                 backgroundColor: 'rgba(124, 77, 255, 0.5)',
                 borderColor: 'rgb(124, 77, 255)',
@@ -165,21 +159,12 @@
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
         console.log(resposta)
-
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
-        }
-
         console.log('----------------------------------------------')
         console.log('O gráfico será plotado com os respectivos valores:')
         console.log('Labels:')
         console.log(labels)
         console.log('Dados:')
-        console.log(dados.datasets)
+        console.log(resposta.datasets)
         console.log('----------------------------------------------')
 
         const ctx = document.getElementById('myChart');

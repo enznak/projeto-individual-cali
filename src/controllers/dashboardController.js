@@ -1,0 +1,38 @@
+var dashboardModel = require("../models/dashboardModel");
+
+function buscarPontosCategoria(req, res) {
+    var idUsuario = req.params.idUsuario;
+    dashboardModel.buscarPontosCategoria(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.json(resultado[0]);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+function buscarKpiIndicadores(req, res) {
+    var idUsuario = req.params.idUsuario;
+    medidaModel.buscarKpiIndicadores(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+module.exports = {
+    buscarPontosCategoria,
+    buscarKpiIndicadores
+
+}

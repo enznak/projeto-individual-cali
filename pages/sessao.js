@@ -40,3 +40,7 @@ function finalizarAguardar(texto) {
     }
 }
 
+function nomeUsuario() {
+    document.getElementById('olausuario').innerHTML = sessionStorage.NOME_USUARIO
+}
+

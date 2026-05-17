@@ -9,3 +9,59 @@
     min-height: 100vh;
     background: #111315;
 }
+
+.card {
+    display: flex;
+    position: relative;
+    background: #171A1F;
+    width: 400px;
+    height: 550px;
+    top: 50px;
+    flex-direction: column;
+    box-shadow: 0 0 16px black;
+}
+
+.subcard1 {
+    width: 100%;
+    height: 400px;
+    background-color: black;
+}
+
+.subcard2 {
+    display: flex;
+    width: calc(100% - 64px);
+    height: 150px;
+    padding: 32px;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.subcard2 h1 {
+    font-size: 24px;
+    color: white;
+}
+
+.subcard2 p {
+    color: white;
+}
+
+.main {
+    gap: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.thumb {
+    width: 100%;
+    height: 500px;
+    background-color: black;
+}
+
+.row {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}

@@ -27,7 +27,7 @@
                 <a href="../sobre.html">SOBRE</a>
             </div>
             <div class="login">
-                <a href="../login.html">ENTRAR</a>
+                <span>Olá, <span id="olausuario" style="color: #7C4DFF;">usuário</span></span>
             </div>
         </div>
 
@@ -121,6 +121,8 @@
 </body>
 
 <script>
+    window.onload = nomeUsuario()
+
     const listaDeQuestoes = [
 
         {

@@ -97,6 +97,7 @@ canvas {
 .card {
     background-color: #171A1F;
     border: 0px solid #2A2F3A;
+    box-shadow: 0 0 16px black;
 }
 
 .chart-box {

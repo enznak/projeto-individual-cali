@@ -40,132 +40,146 @@
                 <a class="item" href="./sair.html"><img src="../img/logout.png" alt=""></a>
             </div>
         </div>
-
-        <div class="banner-main" id="banners">
-            <div class="banner">
-                <button onclick="arvoreEstatico()"></button>
+        <div class="main">
+            <div>
+                <h2 id="titulo">ÁRVORE DE MOVIMENTOS <span style="color: rgb(146, 146, 146);">/</span> </h2>
+                <button>REDEFINIR</button> <button onclick="salvar()">SALVAR</button>
             </div>
+            <div class="tree-container" id="arvores">
+                <div class="tree" id="arvore1">
+                    <svg class="lines">
+                        <line x1="200" y1="275" x2="400" y2="275" />
+                        <line x1="200" y1="275" x2="400" y2="125" />
+                        <line x1="200" y1="275" x2="600" y2="425" />
+                        <line id="line1" x1="400" y1="275" x2="600" y2="275" style="display: none;" />
+                        <line id="line2" x1="600" y1="275" x2="800" y2="275" style="display: none;" />
+                        <line id="line3" x1="800" y1="275" x2="1000" y2="275" style="display: none;" />
+                        <line id="line2.2" x1="600" y1="425" x2="800" y2="425" style="display: none;" />
+                        <line id="line1.1" x1="400" y1="125" x2="600" y2="125" style="display: none;" />
+                        <line id="line2.1" x1="600" y1="125" x2="800" y2="125" style="display: none;" />
+                        <line id="line3.1" x1="800" y1="125" x2="1000" y2="275" style="display: none;" />
+                        <line id="line3.2" x1="800" y1="425" x2="1000" y2="275" style="display: none;" />
+                    </svg>
+                    <div>
+                        <div class="node active" style="top: 275px; left: 200px;">Push-up</div>
+                        <label class="node" style="top: 275px; left: 400px;">
+                            <input type="checkbox" id="node1" onchange="ativarMove(1)">
+                            <span>Planche Lean</span>
+                        </label>
+                        <label class="node" style="top: 125px; left: 400px;">
+                            <input type="checkbox" id="node1.1" onchange="ativarMove(1.1)">
+                            <span>Planche Lean Push-up</span>
+                        </label>
+                        <label class="node" style="top: 275px; left: 600px;">
+                            <input type="checkbox" id="node2" onchange="ativarMove(2)">
+                            <span>Tuck Planche</span>
+                        </label>
+                        <label class="node" style="top: 125px; left: 600px;">
+                            <input type="checkbox" id="node2.1" onchange="ativarMove(2.1)">
+                            <span>Tuck Planche Push-up</span>
+                        </label>
+                        <label class="node" style="top: 425px; left: 600px;">
+                            <input type="checkbox" id="node2.2" onchange="ativarMove(2.2)">
+                            <span>Tuck Planche Press</span>
+                        </label>
+                        <label class="node" style="top: 275px; left: 800px;">
+                            <input type="checkbox" id="node3" onchange="ativarMove(3)">
+                            <span>Straddle Planche</span>
+                        </label>
+                        <label class="node" style="top: 125px; left: 800px;">
+                            <input type="checkbox" id="node3.1" onchange="ativarMove(3.1)">
+                            <span>Straddle Planche Push-up</span>
+                        </label>
+                        <label class="node" style="top: 425px; left: 800px;">
+                            <input type="checkbox" id="node3.2" onchange="ativarMove(3.2)">
+                            <span>Straddle Planche Press</span>
+                        </label>
 
-            <div class="banner">
-                <button onclick="arvoreDinamico()"></button>
-            </div>
-        </div>
-
-        <div class="esta-main" id="esta" style="display: none;">
-            <div class="arvore">
-                <div class="nivel">
-                    <button>
-                        <h1>Push-up</h1>
-                    </button>
-                    <button>
-                        <h1>Dip</h1>
-                    </button>
-                    <button>
-                        <h1>Pseudo Planche</h1>
-                    </button>
-                    <button>
-                        <h1>Tuck Planche</h1>
-                    </button>
-                    <button>
-                        <h1>Straddle Planche</h1>
-                    </button>
-                    <button>
-                        <h1>Planche</h1>
-                    </button>
-                </div>
-                <div class="nivel">
-                    <button>
-                        <h1>Pull-up</h1>
-                    </button>
-                    <button>
-                        <h1>Tuck FL</h1>
-                    </button>
-                    <button>
-                        <h1>Adv. Tuck FL</h1>
-                    </button>
-                    <button>
-                        <h1>Half-lay FL</h1>
-                    </button>
-                    <button>
-                        <h1>Front-lever</h1>
-                    </button>
-                </div>
-                <div class="nivel">
-                    <button></button>
-                    <button></button>
-                    <button>
-                        <h1>One-arm Handstand</h1>
-                    </button>
-                </div>
-            </div>
-            <div class="arvore">
-                <div class="nivel">
-                    <button>
-                        <h1>Pull-up</h1>
-                    </button>
-                    <button>
-                        <h1>Tuck FL</h1>
-                    </button>
-                    <button>
-                        <h1>Adv. Tuck FL</h1>
-                    </button>
-                    <button>
-                        <h1>Half-lay FL</h1>
-                    </button>
-                    <button>
-                        <h1>Front-lever</h1>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="dina-main" id="dina" style="display: none;">
-            <div class="arvore">
-                <div class="line-arvore">
-                    <button></button>
-                    <button></button>
-                    <button></button>
-                </div>
-                <div class="line-arvore">
-                    <button></button>
-                    <button></button>
-                    <button></button>
-                </div>
-                <div class="line-arvore">
-                    <button></button>
-                    <button></button>
-                    <button></button>
+                        <label class="node" style="top: 275px; left: 1000px;">
+                            <input type="checkbox" id="node4" onchange="ativarMove(4)">
+                            <span>Full Planche</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
 </body>
 
 <script>
     window.onload = nomeUsuario()
-    function arvoreEstatico() {
-        banners.style.display = 'none'
-        esta.style.display = 'block'
-    }
-    function arvoreDinamico() {
-        banners.style.display = 'none'
-        dina.style.display = 'block'
-    }
-    function arvoreCarga() {
-        banners.style.display = 'none'
-        carg.style.display = 'block'
-    }
-    function arvoreRepeticao() {
-        banners.style.display = 'none'
-        repe.style.display = 'block'
-    }
-    function arvoreFuncional() {
-        banners.style.display = 'none'
-        func.style.display = 'block'
+
+    var push_moves = {
+        pup: true,
+        pLean: false,
+        pLeanPU: false,
+        pTuck: false,
+        pTuckPU: false,
+        pTuckP: false,
+        pStraddle: false,
+        pStraddlePU: false,
+        pStraddleP: false,
+        pFull: false
     }
 
-    function voltar() {
+    function ativarMove(move) {
+        var check = document.getElementById(`node${move}`)
+        var line = document.getElementById(`line${move}`)
+        var lab = check.closest('label')
 
+        if (check) {
+            lab.classList.add('active')
+            line.style.display = 'block'
+        } else {
+            lab.classList.remove('active')
+            line.style.display = 'none'
+        }
     }
+
+    function salvar() {
+        push_moves = {
+            pup: true,
+            pLean: document.getElementById('node1').checked,
+            pLeanPU: document.getElementById('node1.1').checked,
+            pTuck: document.getElementById('node2').checked,
+            pTuckPU: document.getElementById('node2.1').checked,
+            pTuckP: document.getElementById('node2.2').checked,
+            pStraddle: document.getElementById('node3').checked,
+            pStraddlePU: document.getElementById('node3.1').checked,
+            pStraddleP: document.getElementById('node3.2').checked,
+            pFull: document.getElementById('node4').checked
+        }
+
+        fetch("/quiz/quiz-categoria", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                IDServer: IDVar,
+                estaticoServer: EstaticoVar,
+                dinamicoServer: DinamicoVar,
+                cargaServer: CargaVar,
+                repeticaoServer: RepeticaoVar,
+                funcionalServer: FuncionalVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
+
 </script>

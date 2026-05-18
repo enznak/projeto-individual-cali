@@ -5,7 +5,8 @@ function buscarPontosCategoria(idUsuario) {
     var instrucaoSql = `SELECT 
     *
     FROM vw_categoria
-    WHERE usuario = ${idUsuario}`;
+    WHERE usuario = ${idUsuario}
+    ORDER BY id DESC`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

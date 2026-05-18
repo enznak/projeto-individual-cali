@@ -8,7 +8,7 @@ router.get("/pontos-categoria/:idUsuario", function (req, res) {
 });
 
 router.get("/kpi-indicadores/:idUsuario", function (req, res) {
-    medidaController.buscarKpiIndicadores(req, res);
+    dashboardController.buscarKpiIndicadores(req, res);
 })
 
 module.exports = router;

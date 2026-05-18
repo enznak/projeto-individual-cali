@@ -49,7 +49,7 @@
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique impedit voluptates ea,
                         sint officia ullam, et reiciendis cumque nihil optio accusantium earum aut odit molestias
                         corrupti consequuntur culpa tenetur. Possimus!</p>
-                    <button onclick="iniciarQuiz3()">Começar</button>
+                    <button onclick="iniciarQuiz(1)">Começar</button>
                 </div>
             </div>
             <div class="card">
@@ -59,7 +59,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eveniet deleniti quod
                         eligendi, earum fugiat debitis libero iste inventore iusto facere, distinctio necessitatibus
                         vitae ducimus alias deserunt doloribus sint! Velit.</p>
-                    <button onclick="iniciarQuiz2()">Começar</button>
+                    <button onclick="iniciarQuiz(2)">Começar</button>
                 </div>
             </div>
             <div class="card">
@@ -69,7 +69,7 @@
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente error illo voluptate vero
                         amet excepturi quisquam dolorum harum ullam tempore tempora, et libero molestiae dolorem
                         perferendis inventore, maiores porro possimus.</p>
-                    <button onclick="iniciarQuiz3()">Começar</button>
+                    <button onclick="iniciarQuiz(3)">Começar</button>
                 </div>
             </div>
         </div>
@@ -78,43 +78,17 @@
             <div id="questao"></div>
 
             <div>
-                <div id="opcao1"></div>
-                <div id="opcao2"></div>
-                <div id="opcao3"></div>
-                <div id="opcao4"></div>
-                <div id="opcao5"></div>
+                <button id="opcao1" onclick="selecionarResposta(1)"></button>
+                <button id="opcao2" onclick="selecionarResposta(2)"></button>
+                <button id="opcao3" onclick="selecionarResposta(3)"></button>
+                <button id="opcao4" onclick="selecionarResposta(4)"></button>
+                <button id="opcao5" onclick="selecionarResposta(5)"></button>
             </div>
-            <button></button>
-        </div>
-
-        <div class="main" id="quiz2" style="display: none;">
-            <div id="questao"></div>
-
-            <div>
-                <div id="opcao1"></div>
-                <div id="opcao2"></div>
-                <div id="opcao3"></div>
-                <div id="opcao4"></div>
-                <div id="opcao5"></div>
+            <div id="botoes">
+                <button>Avançar</button>
+                <button></button>
+                <button></button>
             </div>
-            <button></button>
-        </div>
-
-        <div class="main" id="quiz3" style="display: none;">
-            <div id="questao"></div>
-
-            <div>
-                <div id="opcao1"></div>
-                <div id="opcao2"></div>
-                <div id="opcao3"></div>
-                <div id="opcao4"></div>
-                <div id="opcao5"></div>
-            </div>
-
-            <div id="botoes"></div>
-            <button>Avançar</button>
-            <button></button>
-            <button></button>
         </div>
     </div>
 
@@ -123,36 +97,7 @@
 <script>
     window.onload = nomeUsuario()
 
-    const listaDeQuestoes = [
-
-        {
-            pergunta: "Qual mês tem 30 dias?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
-            alternativaCorreta: "alternativaC"
-        },
-
-        {
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
-            alternativaCorreta: "alternativaD"
-        },
-
-        {
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
-            alternativaCorreta: "alternativaD"
-        }
-
-    ]
+    let listaDePerguntas = []
 
     let pontos_categoria = {
         estatico: 0,
@@ -170,32 +115,113 @@
         thumbnail.style.display = 'none'
     }
 
-    function iniciarQuiz1() {
+    function iniciarQuiz(idQuiz) {
+        pontos_categoria = {
+            estatico: 0,
+            dinamico: 0,
+            carga: 0,
+            repeticao: 0,
+            funcional: 0
+        }
+        buscarDadosQuiz(idQuiz)
         esconderMenu()
-        quiz1.style.display = 'block'
-        preencherQuestaoAtual(0)
+        document.getElementById(`quiz${idQuiz}`).style.display = 'block'
     }
 
-    function iniciarQuiz2() {
-        esconderMenu()
-        quiz2.style.display = 'block'
-        preencherQuestaoAtual(0)
+    function buscarDadosQuiz(idQuiz) {
+        fetch(`/quiz/quiz-perguntas/${idQuiz}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(resposta)
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    listarQuiz(resposta, idQuiz);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
     }
 
-    function iniciarQuiz3() {
-        esconderMenu()
-        quiz3.style.display = 'block'
+    function listarQuiz(resposta) {
+        listaDePerguntas = resposta
+        console.log(resposta)
         preencherQuestaoAtual(0)
     }
 
     function preencherQuestaoAtual(index) {
-        const questaoAtual = listaDeQuestoes[index]
-        questao_atual = index
+        const questaoAtual = listaDePerguntas[index]
 
         document.getElementById("questao").innerHTML = questaoAtual.pergunta;
-        document.getElementById("opcao1").innerHTML = questaoAtual.alternativaA;
-        document.getElementById("opcao2").innerHTML = questaoAtual.alternativaB;
-        document.getElementById("opcao3").innerHTML = questaoAtual.alternativaC;
-        document.getElementById("opcao4").innerHTML = questaoAtual.alternativaD;
+        document.getElementById("opcao1").innerHTML = questaoAtual.opcaoA;
+        document.getElementById("opcao2").innerHTML = questaoAtual.opcaoB;
+        document.getElementById("opcao3").innerHTML = questaoAtual.opcaoC;
+        document.getElementById("opcao4").innerHTML = questaoAtual.opcaoD;
+        document.getElementById("opcao5").innerHTML = questaoAtual.opcaoE;
+    }
+
+    function selecionarResposta(opcao) {
+        if (opcao == 1) {
+            pontos_categoria.estatico += 1
+        }
+        if (opcao == 2) {
+            pontos_categoria.dinamico += 1
+        }
+        if (opcao == 3) {
+            pontos_categoria.carga += 1
+        }
+        if (opcao == 4) {
+            pontos_categoria.repeticao += 1
+        }
+        if (opcao == 5) {
+            pontos_categoria.funcional += 1
+        }
+        if (questao_atual < listaDePerguntas.length - 1) {
+            questao_atual = questao_atual + 1
+            preencherQuestaoAtual(questao_atual)
+        } else {
+            mostrarResultado()
+        }
+    }
+
+    function mostrarResultado() {
+        var IDVar = sessionStorage.ID_USUARIO;
+        var EstaticoVar = pontos_categoria.estatico;
+        var DinamicoVar = pontos_categoria.dinamico;
+        var CargaVar = pontos_categoria.carga;
+        var RepeticaoVar = pontos_categoria.repeticao;
+        var FuncionalVar = pontos_categoria.funcional;
+
+        fetch("/quiz/quiz-categoria", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                IDServer: IDVar,
+                estaticoServer: EstaticoVar,
+                dinamicoServer: DinamicoVar,
+                cargaServer: CargaVar,
+                repeticaoServer: RepeticaoVar,
+                funcionalServer: FuncionalVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
     }
 </script>

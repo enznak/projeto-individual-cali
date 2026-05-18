@@ -96,7 +96,7 @@ canvas {
 
 .card {
     background-color: #171A1F;
-    border: 0px solid #2A2F3A;
+    border: 0;
     box-shadow: 0 0 16px black;
 }
 
@@ -132,14 +132,6 @@ canvas {
     padding-left: 300px;
     padding-right: 300px;
     padding-bottom: 100px;
-}
-
-.main h1 {
-    color: white;
-    position: relative;
-    margin-top: 50px;
-    font-size: 40px;
-    font-weight: 700;
 }
 
 .main h2 {

@@ -41,8 +41,8 @@
             </div>
         </div>
         <div class="main">
-            <div>
-                <h2 id="titulo">ÁRVORE DE MOVIMENTOS <span style="color: rgb(146, 146, 146);">/</span> </h2>
+            <h2 id="titulo">ÁRVORE DE MOVIMENTOS <span style="color: rgb(146, 146, 146);">/</span> </h2>
+            <div class="bar">
                 <button>REDEFINIR</button> <button onclick="salvar()">SALVAR</button>
             </div>
             <div class="tree-container" id="arvores">
@@ -110,17 +110,25 @@
 <script>
     window.onload = nomeUsuario()
 
-    var push_moves = {
-        pup: true,
-        pLean: false,
-        pLeanPU: false,
-        pTuck: false,
-        pTuckPU: false,
-        pTuckP: false,
-        pStraddle: false,
-        pStraddlePU: false,
-        pStraddleP: false,
-        pFull: false
+    var push_moves = [
+        {pup: true},
+        {pLean: false},
+        {pLeanPU: false},
+        {pTuck: false},
+        {pTuckPU: false},
+        {pTuckP: false},
+        {pStraddle: false},
+        {pStraddlePU: false},
+        {pStraddleP: false},
+        {pFull: false}
+    ]
+
+    var pull_moves = {
+
+    }
+
+    var balance_moves = {
+
     }
 
     function ativarMove(move) {
@@ -138,20 +146,25 @@
     }
 
     function salvar() {
-        push_moves = {
-            pup: true,
-            pLean: document.getElementById('node1').checked,
-            pLeanPU: document.getElementById('node1.1').checked,
-            pTuck: document.getElementById('node2').checked,
-            pTuckPU: document.getElementById('node2.1').checked,
-            pTuckP: document.getElementById('node2.2').checked,
-            pStraddle: document.getElementById('node3').checked,
-            pStraddlePU: document.getElementById('node3.1').checked,
-            pStraddleP: document.getElementById('node3.2').checked,
-            pFull: document.getElementById('node4').checked
-        }
+        push_moves = [
+            {pup: true},
+            {pLean: document.getElementById('node1').checked},
+            {pLeanPU: document.getElementById('node1.1').checked},
+            {pTuck: document.getElementById('node2').checked},
+            {pTuckPU: document.getElementById('node2.1').checked},
+            {pTuckP: document.getElementById('node2.2').checked},
+            {pStraddle: document.getElementById('node3').checked},
+            {pStraddlePU: document.getElementById('node3.1').checked},
+            {pStraddleP: document.getElementById('node3.2').checked},
+            {pFull: document.getElementById('node4').checked}
+        ]
 
-        fetch("/quiz/quiz-categoria", {
+        var pushVar = push_moves
+        var pullVar =  pull_moves
+        var balanceVar = balance_moves
+        var IDVar = sessionStorage.ID_USUARIO
+
+        fetch("/arvore/movimentos-usuario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -160,11 +173,9 @@
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
                 IDServer: IDVar,
-                estaticoServer: EstaticoVar,
-                dinamicoServer: DinamicoVar,
-                cargaServer: CargaVar,
-                repeticaoServer: RepeticaoVar,
-                funcionalServer: FuncionalVar,
+                pushServer: pushVar,
+                pullServer: pullVar,
+                balanceServer: balanceVar,
             }),
         })
             .then(function (resposta) {

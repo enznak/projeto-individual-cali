@@ -55,39 +55,27 @@
             <div class="card">
                 <div class="subcard1"></div>
                 <div class="subcard2">
-                    <h1>Quiz 2 - Nível</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius eveniet deleniti quod
-                        eligendi, earum fugiat debitis libero iste inventore iusto facere, distinctio necessitatibus
-                        vitae ducimus alias deserunt doloribus sint! Velit.</p>
-                    <button onclick="iniciarQuiz(2)">Começar</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="subcard1"></div>
-                <div class="subcard2">
                     <h1>Quiz 3 - Conhecimento</h1>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente error illo voluptate vero
                         amet excepturi quisquam dolorum harum ullam tempore tempora, et libero molestiae dolorem
                         perferendis inventore, maiores porro possimus.</p>
-                    <button onclick="iniciarQuiz(3)">Começar</button>
+                    <button onclick="iniciarQuiz(2)">Começar</button>
                 </div>
             </div>
         </div>
 
-        <div class="main" id="quiz1" style="display: none;">
-            <div id="questao"></div>
+        <div class="main-quiz" id="quiz1" style="display: none;">
+            <div class="card-quiz">
+                <span id="num_atual">1/10</span>
+                <div class="question" id="questao"></div>
 
-            <div>
-                <button id="opcao1" onclick="selecionarResposta(1)"></button>
-                <button id="opcao2" onclick="selecionarResposta(2)"></button>
-                <button id="opcao3" onclick="selecionarResposta(3)"></button>
-                <button id="opcao4" onclick="selecionarResposta(4)"></button>
-                <button id="opcao5" onclick="selecionarResposta(5)"></button>
-            </div>
-            <div id="botoes">
-                <button>Avançar</button>
-                <button></button>
-                <button></button>
+                <div class="answer-container">
+                    <button class="answer" id="opcao1" onclick="selecionarResposta(1)"></button>
+                    <button class="answer" id="opcao2" onclick="selecionarResposta(2)"></button>
+                    <button class="answer" id="opcao3" onclick="selecionarResposta(3)"></button>
+                    <button class="answer" id="opcao4" onclick="selecionarResposta(4)"></button>
+                    <button class="answer" id="opcao5" onclick="selecionarResposta(5)"></button>
+                </div>
             </div>
         </div>
     </div>
@@ -125,7 +113,7 @@
         }
         buscarDadosQuiz(idQuiz)
         esconderMenu()
-        document.getElementById(`quiz${idQuiz}`).style.display = 'block'
+        document.getElementById(`quiz${idQuiz}`).style.display = 'flex'
     }
 
     function buscarDadosQuiz(idQuiz) {
@@ -160,6 +148,8 @@
         document.getElementById("opcao3").innerHTML = questaoAtual.opcaoC;
         document.getElementById("opcao4").innerHTML = questaoAtual.opcaoD;
         document.getElementById("opcao5").innerHTML = questaoAtual.opcaoE;
+
+        num_atual.innerHTML = questao_atual+1 + '/10'
     }
 
     function selecionarResposta(opcao) {

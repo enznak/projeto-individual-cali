@@ -18,7 +18,7 @@ function buscarPontosCategoria(req, res) {
 
 function buscarKpiIndicadores(req, res) {
     var idUsuario = req.params.idUsuario;
-    medidaModel.buscarKpiIndicadores(idUsuario).then(function (resultado) {
+    dashboardModel.buscarKpiIndicadores(idUsuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

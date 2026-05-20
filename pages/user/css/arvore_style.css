@@ -38,9 +38,12 @@
 .banner:hover {}
 
 .tree-container {
-    min-width: 1200px;
+    display: flex;
+    max-width: 1400px;
     min-height: 550px;
     box-shadow: 0 0 0px black;
+    background-color: #171A1F;
+    overflow: auto;
 }
 
 .tree {
@@ -65,7 +68,7 @@
     transform: translate(-50%, -50%);
     padding: 10px 20px;
     background-color: #171A1F;
-    border: 2px solid #6A3EF0;
+    border: 0px solid #6A3EF0;
     color: white;
     cursor: pointer;
     max-width: 100px;
@@ -86,4 +89,13 @@
 
 .node.active {
     background-color: #6A3EF0;
+}
+
+.bar {
+    display: flex;
+}
+
+.bar button {
+    width: 100px;
+    height: 40px;
 }

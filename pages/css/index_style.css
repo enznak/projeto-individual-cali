@@ -42,12 +42,7 @@
     background-color: #592FD1;
 }
 
-.main a {
-    text-decoration: none;
-    color: white;
-}
-
-.container {
+.main {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
         url(../img/111.JPG);
     background-size: cover;
@@ -55,9 +50,14 @@
     background-repeat: no-repeat;
 }
 
-.main2 {
+.main a {
+    text-decoration: none;
+    color: white;
+}
+
+.container {
     background-color: #111315;
-    min-height: calc(100vh - 80px);
+    width: 100%;
 }
 
 .card {
@@ -81,4 +81,95 @@
 
 .int p {
     color: black;
+}
+
+.main2 {
+    min-height: 90vh;
+    background-color: #111315;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+}
+
+.main2-content {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.tag {
+    display: inline-block;
+    color: #7C4DFF;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.main2-text h1 {
+    color: white;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.main2-text p {
+    color: #cfcfcf;
+    font-size: 18px;
+    max-width: 700px;
+    line-height: 1.4;
+}
+
+.beneficios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.beneficio-card {
+    background: #171A1F;
+    border-radius: 16px;
+    box-shadow: 0 0 16px black;
+    padding: 24px;
+    transition: transform 0.3s ease, border 0.3s ease;
+}
+
+.beneficio-card h3 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.beneficio-card p {
+    color: #cfcfcf;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.image {
+    height: 700px;
+    width: 600px;
+    background: url(../img/hs.jpg);
+    background-size: cover;
+}
+
+.linha {
+    position: relative;
+    background-color: white;
+    width: 80%;
+    height: 1px;
+    left: 10%;
+}
+
+.main3 {
+    width: 100%;
+    height: 45vh;
+    box-sizing: border-box;
+    padding: 100px;
+}
+
+.main3-text {
+
 }

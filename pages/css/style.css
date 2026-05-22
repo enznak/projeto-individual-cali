@@ -16,7 +16,7 @@ html {
     display: flex;
     height: 80px;
     backdrop-filter: blur(16px);
-    background: rgba(7, 11, 20, 0.82);
+    background-color: rgba(7, 11, 20, 0.82);
     color: white;
     position: sticky;
     top: 0;
@@ -72,4 +72,76 @@ html {
 
 .main {
     min-height: calc(100vh - 80px);
+}
+
+footer {
+    background-color: #111315;
+    height: 275px;
+}
+
+.div1 {
+    display: flex;
+    height: 60%;
+    background-color: rgba(7, 11, 20, 0.83);
+    justify-content: center;
+}
+
+.div1 img {
+    position: relative;
+    top: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+.navbar2 {
+    position: relative;
+    bottom: 90px;
+    display: flex;
+    width: 30%;
+    font-size: 16px;
+    justify-content: space-between;
+    gap: 30px;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.navbar2 a {
+    text-decoration: none;
+    letter-spacing: 2px;
+    color: white;
+}
+
+.socials {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+.socials img {
+    position: relative;
+    bottom: 25px;
+    width: 40px;
+    height: 40px;
+}
+
+.line {
+    position: relative;
+    bottom: 100px;
+    height: 1px;
+    width: 30%;
+    background-color: #cfcfcf;
+}
+
+.div2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgba(7, 11, 20, 0.83);
+    height: 40%;
+    flex-direction: column;
+    padding-bottom: 32px;
+    box-sizing: border-box;
 }

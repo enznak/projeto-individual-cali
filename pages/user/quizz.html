@@ -46,19 +46,16 @@
                 <div class="subcard1"></div>
                 <div class="subcard2">
                     <h1>Quiz 1 - Categoria</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique impedit voluptates ea,
-                        sint officia ullam, et reiciendis cumque nihil optio accusantium earum aut odit molestias
-                        corrupti consequuntur culpa tenetur. Possimus!</p>
+                    <p>10 perguntas sobre suas preferências, hábitos e facilidades no treino de calistenia. O resultado
+                        revela qual categoria domina sua identidade como atleta.</p>
                     <button onclick="iniciarQuiz(1)">Começar</button>
                 </div>
             </div>
             <div class="card">
                 <div class="subcard1"></div>
                 <div class="subcard2">
-                    <h1>Quiz 3 - Conhecimento</h1>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente error illo voluptate vero
-                        amet excepturi quisquam dolorum harum ullam tempore tempora, et libero molestiae dolorem
-                        perferendis inventore, maiores porro possimus.</p>
+                    <h1>Quiz 2 - Conhecimento</h1>
+                    <p>O quanto você sabe sobre a modalidade? Responda às perguntas e teste seus conhecimentos.</p>
                     <button onclick="iniciarQuiz(2)">Começar</button>
                 </div>
             </div>
@@ -149,7 +146,7 @@
         document.getElementById("opcao4").innerHTML = questaoAtual.opcaoD;
         document.getElementById("opcao5").innerHTML = questaoAtual.opcaoE;
 
-        num_atual.innerHTML = questao_atual+1 + '/10'
+        num_atual.innerHTML = questao_atual + 1 + '/10'
     }
 
     function selecionarResposta(opcao) {

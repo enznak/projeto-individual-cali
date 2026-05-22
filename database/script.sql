@@ -75,8 +75,7 @@ insert into pontos_categoria values
 
 insert into quizzes values
 (1, 'Categoria', '10 perguntas sobre suas preferências, hábitos e facilidades no treino de calistenia. O resultado revela qual categoria domina sua identidade como atleta.'),
-(2, 'Nível', 'Qual o nível da sua jornada na calistenia?'),
-(3, 'Conhecimento', 'O quanto você sabe sobre a modalidade?');
+(2, 'Conhecimento', 'O quanto você sabe sobre a modalidade? Responda às perguntas e teste seus conhecimentos.');
 
 insert into perguntas values 
 (default, 1, 'Quando você imagina o movimento mais impressionante da calistenia, qual vem primeiro?', 'Movimento suspenso no ar', 'Giros no ar usando a barra fixa', 'Barra fixa com muito peso extra', 'Muitas flexões sem parar', 'Rolar, agachar e se mover com fluidez'),

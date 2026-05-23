@@ -40,7 +40,7 @@
                     <span id="nm_erro2" class="erro"></span>
 
                     <label>E-mail</label>
-                    <input id="email_input" type="text" placeholder="email@exemplo.com">
+                    <input id="email_input" type="text" placeholder="email@exemplo.com" class="email">
                     <span id="em_erro0" class="erro"></span>
                     <span id="em_erro1" class="erro"></span>
                     <span id="em_erro2" class="erro"></span>
@@ -54,17 +54,14 @@
 
 
                     <label>Confirmar a senha</label>
-                    <input id="senha2_input" type="password" placeholder="Digite sua senha novamente">
+                    <input id="senha2_input" type="password" placeholder="Digite sua senha novamente" class="password">
                     <span id="sn2_erro0" class="erro"></span>
                     <span id="sn2_erro1" class="erro"></span>
                     <span id="sn2_erro2" class="erro"></span>
 
                     <button type="submit" onclick="; limpar(); validar()">Cadastrar</button>
-                    <span>Já possui acesso? <a href="./login.html">Entrar na conta</a></span>
+                    <span class="center">Já possui acesso? <a href="./login.html">Entrar na conta</a></span>
                 </div>
-            </div>
-            <div class="card">
-
             </div>
         </div>
     </div>
@@ -90,7 +87,7 @@
                 nm_erro0.innerHTML = `Insira o nome de usuário.`
             } if (form.nm.length > 30) {
                 nm_erro0.innerHTML = `O nome de usuário não pode ter mais de 30 caracteres.`
-            } if (form.nm.length < 3 && !form.nm == null) {
+            } if (form.nm.length < 3 && !form.nm == "") {
                 nm_erro0.innerHTML = `O nome de usuário precisa ter pelo menos 3 caracteres.`
             }
         } if (form.em == "" || form.em.length > 320 || form.em.length < 4 || !form.em.includes("@") || !form.em.includes(".")) {
@@ -104,7 +101,7 @@
                 sn_erro0.innerHTML = `Insira uma senha.`
             } if (form.sn.length > 100) {
                 sn_erro0.innerHTML = `A senha não pode ter mais de 100 caracteres.`
-            } if (form.sn.length < 8 && !form.sn == null) {
+            } if (form.sn.length < 8 && !form.sn == "") {
                 sn_erro0.innerHTML = `A senha precisa ter pelo menos 8 caracteres.`
             }
         } if (form.sn2 == "" || form.sn2 != form.sn) {

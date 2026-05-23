@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/index_style.css">
     <link rel="icon" href="./img/logo_arise.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body onload="validarSessao()">
@@ -75,17 +76,34 @@
         </div>
         <div class="linha"></div>
         <div class="main3">
-            <div class="main3-text">
-                <h2>Área de usuários</h2>
-                <p>Acesso a dashboard , salve os seus movimentos desbloqueados, descubra sua categoria do esporte e
-                    teste
-                    seu conhecimento com quizzes e muito mais.</p>
+            <div class="user-area">
+                <div class="chart">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="user-text">
+                    <h2>Explore a área de usuários</h2>
+                    <p>Cadastre-se agora e tenha acesso ao dashboard, salve seus movimentos desbloqueados, descubra sua
+                        categoria no esporte e teste seus conhecimentos com quizzes e muito mais.</p>
+                </div>
             </div>
         </div>
+        <div class="linha"></div>
         <div class="main3">
             <div class="main3-text">
-                <h2>Artigos do nosso blog</h2>
-                <p></p>
+                <div>
+                    <h2>Artigos em destaque</h2>
+                    <p>Descubra o mundo da calistenia pelos blogs: notícias, curiosidades e conteúdo útil.</p>
+                </div>
+
+                <div class="carrosel-container">
+                    <button class="btn ant">◄</button>
+                    <ul class="carrosel" id="carrosel">
+                        <li class="slide" id="slide1"><a href=""></a></li>
+                        <li class="slide" id="slide2"><a href=""></a></li>
+                        <li class="slide" id="slide3"><a href=""></a></li>
+                    </ul>
+                    <button class="btn prox">►</button>
+                </div>
             </div>
         </div>
 
@@ -111,5 +129,86 @@
         </footer>
     </div>
 </body>
+
+<script>
+    const carrosel = document.getElementById('carrosel');
+    const ant = document.querySelector('.ant');
+    const prox = document.querySelector('.prox');
+
+    function getScrollAmount() {
+        return carrosel.querySelector('.slide').offsetWidth + 16;
+    }
+
+    ant.addEventListener('click', () => {
+        carrosel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    prox.addEventListener('click', () => {
+        carrosel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+
+    let labels = [];
+
+    const data = {
+        labels: [
+            'Estático',
+            'Dinâmico',
+            'Carga',
+            'Repetição',
+            'Funcional',
+        ],
+        datasets: [{
+            label: 'Pontos',
+            data: [
+                9,
+                6,
+                2,
+                7,
+                1
+            ],
+            fill: true,
+            backgroundColor: 'rgba(124, 77, 255, 0.5)',
+            borderColor: 'rgb(124, 77, 255)',
+            pointBackgroundColor: 'rgb(124, 77, 255)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(255, 99, 132)'
+
+        }]
+    };
+
+    const ctx = document.getElementById('myChart');
+    const config = {
+        type: 'radar',
+        data: data,
+        options: {
+            scales: {
+                r: {
+                    min: 0,
+                    max: 10,
+                    ticks: {
+                        display: false
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.25)'
+                    },
+                    angleLines: {
+                        color: 'rgba(255, 255, 255, 0.25)'
+                    },
+                    pointLabels: {
+                        color: '#ffffff'
+                    }
+                }
+            },
+            elements: {
+                line: {
+                    borderWidth: 3
+                }
+            }
+        },
+    };
+
+    let myChart = new Chart(ctx, config);
+</script>
 
 </html>

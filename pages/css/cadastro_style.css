@@ -16,26 +16,25 @@
 .card {
     display: flex;
     width: 450px;
-    height: 725px;
-    background: linear-gradient(rgba(18, 22, 37, 0.88), rgba(11, 14, 24, 0.92));
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 720px;
+    background-color: #111315;
     align-items: center;
     border-radius: 20px;
     flex-direction: column;
     padding-top: 60px;
     backdrop-filter: blur(16px);
+    box-shadow: 0 0 16px black;
 }
 
 .card h1 {
     color: white;
-    margin-bottom: 30px;
+    margin-bottom: 16px;
 }
 
 .form {
     display: flex;
     flex-direction: column;
     width: 80%;
-    gap: 12px;
 }
 
 .form input {
@@ -43,17 +42,23 @@
     border-radius: 14px;
     padding-left: 50px;
     font-size: 16px;
-    background-color: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #171A1F;
+    border: 0;
     color: white;
-}
-
-.form input::placeholder {
+    margin-top: 12px;
+    margin-bottom: 4px;
 }
 
 .form input:focus {
     outline: none;
     border: 1px solid #7C4DFF;
+}
+
+.email {
+    background: url(../img/email.png) no-repeat left;
+    background-size: 16px;
+    background-position: 20px center;
+    background-color: rgb(255, 255, 255);
 }
 
 .user {
@@ -71,39 +76,27 @@
     border: 0;
 }
 
-.form span {
-    color: white;
-    font-size: 16px;
-    margin-top: 20px;
-    align-self: center;
-}
-
 .form label {
     color: white;
     font-size: 16px;
-    margin-top: 20px;
+    margin-top: 24px;
 }
 
 .form button {
     height: 50px;
     border-radius: 16px;
-    background-color: #7C4DFF;
+    background-color: #6A3EF0;
     font-size: 20px;
     font-weight: bold;
     border: 0;
-    box-shadow: 0 0 20px rgba(124, 77, 255, 0.34);
     color: white;
     margin-top: 32px;
 }
 
 .form button:hover {
-    background-color: #6A3EF0;
+    background-color: #592FD1;
     transition: background-color 0.3s ease;
     cursor: pointer;
-}
-
-.form button:active {
-    background-color: #592FD1;
 }
 
 .form a {
@@ -114,4 +107,12 @@
 
 .erro {
     display: none;
+    font-size: 14px;
+    color: red;
+}
+
+.center {
+    margin-top: 32px;
+    text-align: center;
+    color: white;
 }

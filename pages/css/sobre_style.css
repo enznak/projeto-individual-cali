@@ -36,19 +36,25 @@
 }
 
 .card h2 {
-    color: #6A3EF0;
+    display: inline-block;
+    color: #7C4DFF;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
     margin-bottom: 20px;
 }
 
 .card h1 {
     color: white;
-    font-size: 60px;
+    font-size: 48px;
     margin-bottom: 30px;
 }
 
 .card p {
     font-size: 18px;
+    line-height: 1.4;
+    text-align: justify;
     left: 300px;
-    color: white;
+    color: #cfcfcf;
     margin-bottom: 30px;
 }

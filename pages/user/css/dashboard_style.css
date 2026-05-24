@@ -141,3 +141,39 @@ canvas {
     margin-bottom: 50px;
     letter-spacing: 2px;
 }
+
+.dash-info {
+    cursor: pointer;
+    font-weight: 100;
+    position: relative;
+}
+
+.dash-info>.info {
+    position: absolute;
+    top: 0;
+    right: -320px;
+    width: 270px;
+    height: 135px;
+    background-color: #171A1F;
+    overflow: hidden;
+    z-index: 1;
+    line-height: 1.5em;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+}
+
+.dash-info:hover>.info {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.info {
+    font-size: 18px;
+    border-radius: 0 16px 16px;
+    border: 1px solid #7C4DFF;
+    padding: 12px;
+}

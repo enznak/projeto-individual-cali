@@ -43,7 +43,7 @@
 }
 
 .main {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
         url(../img/111.JPG);
     background-size: cover;
     background-position: center;
@@ -56,7 +56,7 @@
 }
 
 .container {
-    background-color: #111315;
+    background-color: rgb(17, 19, 21);
     width: 100%;
 }
 

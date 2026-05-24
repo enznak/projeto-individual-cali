@@ -41,35 +41,37 @@
             </div>
         </div>
         <div class="main">
-            <h2>DASHBOARD <span style="color: rgb(146, 146, 146);">/</span> </h2>
+            <h2>DASHBOARD <span style="color: rgb(146, 146, 146);">/</span> <span class="dash-info">🛈<span
+                        class="info">Área de dashboard: responda os quizzes e preencha a árvore de habilidades para
+                        preencher os indicadores</span></span></h2>
             <div class="dashboard">
                 <div class="card card1">
-                    <div class="kpi-box">Categoria <p>Atleta <span id="kpi_cat">Estático</span></p>
+                    <div class="kpi-box">Categoria <p>Atleta <span id="kpi_cat">xxxxx</span></p>
                     </div>
                 </div>
                 <div class="card card2">
-                    <div class="kpi-box">Classificação atual <p>Nível <span id="kpi_class">Elite</span></p>
+                    <div class="kpi-box">Classificação atual <p>Nível <span id="kpi_class">xxxxx</span></p>
                     </div>
                 </div>
                 <div class="card card3">
-                    <div class="kpi-box">Movimentos desbloqueados <p><span id="kpi_mov">15</span> Ativos</p>
+                    <div class="kpi-box">Movimentos desbloqueados <p><span id="kpi_mov">0</span> Ativos</p>
                     </div>
                 </div>
                 <div class="card card4">
                     <div class="chart-box"> <canvas class="chart4" id="myChart"></canvas> </div>
                 </div>
                 <div class="card card5">
-                    <div class=""> Próximas metas <p>Push</p> <span>Planche</span>
-                        <p>Pull</p><span>Front-Lever</span>
-                        <p>Balance</p><span>Flag</span>
+                    <div class=""> Próximas metas <p>Push</p> <span>xxxxx</span>
+                        <p>Pull</p><span>xxxxx</span>
+                        <p>Balance</p><span>xxxxx</span>
                     </div>
                 </div>
                 <div class="card card6">
-                    <div class="kpi-box">Quizzes realizados<p><span>3</span></p>
+                    <div class="kpi-box">Quizzes realizados<p><span>0</span></p>
                     </div>
                 </div>
                 <div class="card card7">
-                    <div class="kpi-box">Taxa de acerto (quizzes de conhecimento) <p><span>82%</span></p>
+                    <div class="kpi-box">Taxa de acerto (quizzes de conhecimento) <p><span>0%</span></p>
                     </div>
                 </div>
                 <div class="card card8">
@@ -90,6 +92,67 @@
     window.onload = obterDadosKpi(idUsuario);
     window.onload = nomeUsuario()
 
+    const data = {
+        labels: [
+            'Estático',
+            'Dinâmico',
+            'Carga',
+            'Repetição',
+            'Funcional',
+        ],
+        datasets: [{
+            label: 'Pontos',
+            data: [
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            fill: true,
+            backgroundColor: 'rgba(124, 77, 255, 0.5)',
+            borderColor: 'rgb(124, 77, 255)',
+            pointBackgroundColor: 'rgb(124, 77, 255)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(255, 99, 132)'
+
+        }]
+    };
+
+    const ctx = document.getElementById('myChart');
+    const config = {
+        type: 'radar',
+        data: data,
+        options: {
+            scales: {
+                r: {
+                    min: 0,
+                    max: 10,
+                    ticks: {
+                        display: false
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.25)'
+                    },
+                    angleLines: {
+                        color: 'rgba(255, 255, 255, 0.25)'
+                    },
+                    pointLabels: {
+                        color: '#ffffff'
+                    }
+                }
+            },
+            elements: {
+                line: {
+                    borderWidth: 3
+                }
+            }
+        },
+    };
+
+    let myChart = new Chart(ctx, config);
+
     // O gráfico é construído com três funções:
     // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
     // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
@@ -107,7 +170,8 @@
                 response.json().then(function (resposta) {
                     console.log(resposta)
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    plotarGrafico(resposta, idUsuario);
+                    myChart.data.datasets[0].data = [resposta.estatico, resposta.dinamico, resposta.carga, resposta.repeticao, resposta.funcional];
+                    myChart.update();
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -116,92 +180,6 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-    }
-
-    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idUsuario) {
-
-        console.log('iniciando plotagem do gráfico...');
-
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
-
-        // Criando estrutura para plotar gráfico - dados
-        const data = {
-            labels: [
-                'Estático',
-                'Dinâmico',
-                'Carga',
-                'Repetição',
-                'Funcional',
-            ],
-            datasets: [{
-                label: 'Pontos',
-                data: [
-                    resposta.estatico,
-                    resposta.dinamico,
-                    resposta.carga,
-                    resposta.repeticao,
-                    resposta.funcional
-                ],
-                fill: true,
-                backgroundColor: 'rgba(124, 77, 255, 0.5)',
-                borderColor: 'rgb(124, 77, 255)',
-                pointBackgroundColor: 'rgb(124, 77, 255)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgb(255, 99, 132)'
-
-            }]
-        };
-
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(resposta.datasets)
-        console.log('----------------------------------------------')
-
-        const ctx = document.getElementById('myChart');
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'radar',
-            data: data,
-            options: {
-                scales: {
-                    r: {
-                        min: 0,
-                        max: 10,
-                        ticks: {
-                            display: false
-                        },
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.25)'
-                        },
-                        angleLines: {
-                            color: 'rgba(255, 255, 255, 0.25)'
-                        },
-                        pointLabels: {
-                            color: '#ffffff'
-                        }
-                    }
-                },
-                elements: {
-                    line: {
-                        borderWidth: 3
-                    }
-                }
-            },
-        };
-
-        // Adicionando gráfico criado em div na tela
-        let myChart = new Chart(ctx, config);
     }
 
     function obterDadosKpi(idUsuario) {

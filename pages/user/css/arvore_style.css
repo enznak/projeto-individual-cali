@@ -1,6 +1,6 @@
 .container {
     max-width: 100%;
-    min-height: 180vh;
+    min-height: 130vh;
     background: #111315;
 }
 
@@ -40,17 +40,25 @@
 
 .tree-container {
     display: flex;
-    max-width: 1400px;
-    min-height: 550px;
+    max-width: 1200px;
+    min-height: 800px;
     box-shadow: 0 0 0px black;
     background-color: #171A1F;
-    overflow: auto;
+    overflow: scroll;
 }
 
 .tree {
     position: relative;
     width: 1200px;
     height: 430px;
+}
+
+.tree2 {
+    transform: translateY(450px);
+}
+
+.tree3 {
+    transform: translateY(450px);
 }
 
 .lines {
@@ -94,9 +102,47 @@
 
 .bar {
     display: flex;
+    position: absolute;
+    z-index: 1;
 }
 
 .bar button {
     width: 100px;
     height: 40px;
+}
+
+.arv-info {
+    cursor: pointer;
+    font-weight: 100;
+    position: relative;
+}
+
+.arv-info>.info {
+    position: absolute;
+    top: 0;
+    right: -320px;
+    width: 270px;
+    height: 160px;
+    background-color: #171A1F;
+    overflow: hidden;
+    z-index: 1;
+    line-height: 1.5em;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+}
+
+.arv-info:hover>.info {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.info {
+    font-size: 18px;
+    border-radius: 0 16px 16px;
+    border: 1px solid #7C4DFF;
+    padding: 12px;
 }

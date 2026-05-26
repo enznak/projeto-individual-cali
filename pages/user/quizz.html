@@ -43,7 +43,7 @@
         <div class="thumb" id="thumbnail"></div>
         <div class="main" id="menu">
             <div class="card">
-                <div class="subcard1"></div>
+                <div class="subcard1 thumb1"></div>
                 <div class="subcard2">
                     <h1>Quiz 1 - Categoria</h1>
                     <p>10 perguntas sobre suas preferências, hábitos e facilidades no treino de calistenia. O resultado
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="card">
-                <div class="subcard1"></div>
+                <div class="subcard1 thumb2"></div>
                 <div class="subcard2">
                     <h1>Quiz 2 - Conhecimento</h1>
                     <p>O quanto você sabe sobre a modalidade? Responda às perguntas e teste seus conhecimentos.</p>
@@ -61,18 +61,25 @@
             </div>
         </div>
 
-        <div class="main-quiz" id="quiz1" style="display: none;">
+        <div class="main-quiz" id="quiz" style="display: none;">
             <div class="card-quiz">
                 <span id="num_atual">1/10</span>
                 <div class="question" id="questao"></div>
 
                 <div class="answer-container">
-                    <button class="answer" id="opcao1" onclick="selecionarResposta(1)"></button>
-                    <button class="answer" id="opcao2" onclick="selecionarResposta(2)"></button>
-                    <button class="answer" id="opcao3" onclick="selecionarResposta(3)"></button>
-                    <button class="answer" id="opcao4" onclick="selecionarResposta(4)"></button>
-                    <button class="answer" id="opcao5" onclick="selecionarResposta(5)"></button>
+                    <button class="answer" id="opcao1" onclick="selecionarResposta('A')"></button>
+                    <button class="answer" id="opcao2" onclick="selecionarResposta('B')"></button>
+                    <button class="answer" id="opcao3" onclick="selecionarResposta('C')"></button>
+                    <button class="answer" id="opcao4" onclick="selecionarResposta('D')"></button>
+                    <button class="answer" id="opcao5" onclick="selecionarResposta('E')"></button>
                 </div>
+            </div>
+
+            <div class="card-quiz resultado1" style="display: none;">
+
+            </div>
+            <div class="card-quiz resultado2" style="display: none;">
+
             </div>
         </div>
     </div>
@@ -92,7 +99,14 @@
         funcional: 0
     }
 
+    let conhecimentos = {
+        acertos: 0,
+        erros: 0
+    }
+
     let questao_atual = 0
+
+    let id_quiz = 0
 
 
     function esconderMenu() {
@@ -101,6 +115,7 @@
     }
 
     function iniciarQuiz(idQuiz) {
+        id_quiz = idQuiz
         pontos_categoria = {
             estatico: 0,
             dinamico: 0,
@@ -108,9 +123,12 @@
             repeticao: 0,
             funcional: 0
         }
+
+        questao_atual = 0
+
         buscarDadosQuiz(idQuiz)
         esconderMenu()
-        document.getElementById(`quiz${idQuiz}`).style.display = 'flex'
+        document.getElementById(`quiz`).style.display = 'flex'
     }
 
     function buscarDadosQuiz(idQuiz) {
@@ -146,24 +164,32 @@
         document.getElementById("opcao4").innerHTML = questaoAtual.opcaoD;
         document.getElementById("opcao5").innerHTML = questaoAtual.opcaoE;
 
-        num_atual.innerHTML = questao_atual + 1 + '/10'
+        document.getElementById("num_atual").innerHTML = questao_atual + 1 + '/10'
     }
 
     function selecionarResposta(opcao) {
-        if (opcao == 1) {
-            pontos_categoria.estatico += 1
-        }
-        if (opcao == 2) {
-            pontos_categoria.dinamico += 1
-        }
-        if (opcao == 3) {
-            pontos_categoria.carga += 1
-        }
-        if (opcao == 4) {
-            pontos_categoria.repeticao += 1
-        }
-        if (opcao == 5) {
-            pontos_categoria.funcional += 1
+        if (id_quiz == 1) {
+            if (opcao == 'A' && pontos_categoria.estatico < 10) {
+                pontos_categoria.estatico += 2
+            }
+            if (opcao == 'B' && pontos_categoria.dinamico < 10) {
+                pontos_categoria.dinamico += 2
+            }
+            if (opcao == "C" && pontos_categoria.carga < 10) {
+                pontos_categoria.carga += 2
+            }
+            if (opcao == "D" && pontos_categoria.repeticao < 10) {
+                pontos_categoria.repeticao += 2
+            }
+            if (opcao == "E" && pontos_categoria.funcional < 10) {
+                pontos_categoria.funcional += 2
+            }
+        } else if (id_quiz == 2) {
+            if (opcao == listaDePerguntas[questao_atual].correta) {
+                conhecimentos.acertos++
+            } else {
+                conhecimentos.erros++
+            }
         }
         if (questao_atual < listaDePerguntas.length - 1) {
             questao_atual = questao_atual + 1
@@ -180,35 +206,83 @@
         var CargaVar = pontos_categoria.carga;
         var RepeticaoVar = pontos_categoria.repeticao;
         var FuncionalVar = pontos_categoria.funcional;
+        var AcertosVar = conhecimentos.acertos;
+        var ErrosVar = conhecimentos.erros;
 
-        fetch("/quiz/quiz-categoria", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                IDServer: IDVar,
-                estaticoServer: EstaticoVar,
-                dinamicoServer: DinamicoVar,
-                cargaServer: CargaVar,
-                repeticaoServer: RepeticaoVar,
-                funcionalServer: FuncionalVar,
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
+        if (id_quiz == 1) {
+            telaResultado(id_quiz)
 
-                if (resposta.ok) {
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
+            fetch("/quiz/quiz-categoria", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    IDServer: IDVar,
+                    estaticoServer: EstaticoVar,
+                    dinamicoServer: DinamicoVar,
+                    cargaServer: CargaVar,
+                    repeticaoServer: RepeticaoVar,
+                    funcionalServer: FuncionalVar,
+                }),
             })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-            });
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
 
-        return false;
+                    if (resposta.ok) {
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+
+            return false;
+        } else if (id_quiz == 2) {
+            telaResultado(id_quiz)
+
+            fetch("/quiz/quiz-conhecimento", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    IDServer: IDVar,
+                    acertosServer: AcertosVar,
+                    errosServer: ErrosVar,
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+
+            return false;
+        }
     }
+
+    function telaResultado(id_quiz) {
+        if (id_quiz == 1) {
+            quiz.style.display = 'none'
+            resultado1.style.display = 'flex'
+        }
+
+        if (id_quiz == 2) {
+            quiz.style.display = 'none'
+            resultado2.style.display = 'flex'
+        }
+    }
+
 </script>

@@ -11,4 +11,8 @@ router.post("/quiz-categoria", function (req, res) {
     quizController.inserirDadosCategoria(req, res);
 })
 
+router.post("/quiz-conhecimento", function (req, res) {
+    quizController.inserirDadosConhecimento(req, res);
+})
+
 module.exports = router;

@@ -317,3 +317,17 @@
 .btn.prox {
     right: -80px;
 }
+
+.user-text a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 185px;
+    height: 40px;
+    text-align: center;
+    background-color: #6A3EF0;
+    width: 40%;
+    color: white;
+    text-decoration: none;
+}

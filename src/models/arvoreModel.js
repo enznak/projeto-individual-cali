@@ -12,9 +12,10 @@ async function inserirMovimentosPull(IdUsuario, push_moves, pull_moves, balance_
         AND id_usuario = ${IdUsuario}`;
 
         try {
-            console.log("Executando a instrução SQL: \n" + instrucaoSql);
+            console.log("Executando a instrução SQL: \n" + instrucaoSqlInsert);
             await database.executar(instrucaoSqlInsert)
         } catch {
+            console.log("Executando a instrução SQL: \n" + instrucaoSqlUpdate);
             await database.executar(instrucaoSqlUpdate)
         }
     }

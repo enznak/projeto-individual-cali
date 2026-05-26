@@ -41,8 +41,29 @@ function inserirDadosCategoria(req, res) {
             });
 }
 
+function inserirDadosConhecimento(req, res) {
+    var IdUsuario = req.body.IDServer;
+    var acertos = req.body.acertosServer;
+    var erros = req.body.errosServer;
+
+    quizModel.inserirDadosConhecimento(IdUsuario, acertos, erros)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao inserir os dados.", erro.sqlMessage
+
+                );
+                res.status(500).json(erro.sqlMessage);
+            });
+}
+
 module.exports = {
     buscarPerguntasOpcoes,
-    inserirDadosCategoria
+    inserirDadosCategoria,
+    inserirDadosConhecimento
 
 }

@@ -18,7 +18,7 @@
 .subcard1 {
     width: 100%;
     height: 175px;
-    background-color: black;
+    background: black;
 }
 
 .subcard2 {
@@ -70,7 +70,24 @@
 .thumb {
     width: 100%;
     height: 500px;
-    background-color: black;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url(../../img/freestylebg.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.thumb1 {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url(../../img/flagflag.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.thumb2 {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url(../../img/freestylebg.webp);
 }
 
 .main-quiz {

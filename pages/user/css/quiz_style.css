@@ -101,59 +101,181 @@
 
 .card-quiz {
     display: flex;
-    height: 600px;
-    width: 100%;
-    max-width: 1000px;
-    background-color: #171A1F;
-    margin-bottom: 100px;
     flex-direction: column;
-    gap: 20px;
-    padding: 30px;
-    box-shadow: 0 0 16px black;
-    align-items: center;
+    align-items: stretch;
+    width: 100%;
+    max-width: 900px;
+    min-height: 520px;
+    padding: 28px 32px 32px 32px;
+    margin-bottom: 60px;
+    border-radius: 18px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+    background-color: #171A1F;
+    gap: 18px;
 }
 
-.card-quiz span {
+.card-quiz span#num_atual {
     position: relative;
-    top: 10px;
-    left: -450px;
-    color: white;
-    font-size: 24px;
+    top: 0;
+    left: 0;
+    align-self: flex-start;
+    color: #cfcfcf;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .question {
-    margin-top: 30px;
-    color: white;
-    font-size: 24px;
-    padding: 20px;
-    border: 1px solid white;
-    border-radius: 16px;
-    margin-bottom: 30px;
+    margin-top: 4px;
+    color: #FFFFFF;
+    font-size: 22px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(23, 26, 31, 0.85);
+    backdrop-filter: blur(6px);
 }
 
 .answer-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background-color: #171A1F;
+    gap: 14px;
+    margin-top: 10px;
 }
 
 .answer {
-    height: 40px;
-    border: 0;
-    padding: 5px;
-    color: #ffffff;
+    height: auto;
+    min-height: 44px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     background-color: #171A1F;
+    color: #E4E7EE;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 0 16px black;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+    transition: background-color 0.2s ease, transform 0.1s ease,
+        border-color 0.2s ease, color 0.2s ease;
 }
 
 .answer:hover {
-    background-color: #592FD1;
+    background: linear-gradient(135deg, #6A3EF0 0%, #7C4DFF 100%);
+    border-color: rgba(124, 77, 255, 0.9);
+    color: #FFFFFF;
 }
 
 .answer:active {
-    transform: scale(0.98);
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+}
+
+#resultado1,
+#resultado2 {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 900px;
+    min-height: 420px;
+    padding: 32px 32px 28px 32px;
+    margin-bottom: 60px;
+    background-color: #171A1F;
+    border-radius: 20px;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8);
+    color: #FFFFFF;
+}
+
+.resultado-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.resultado-header .resultados {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #A0A6B8;
+}
+
+.resultado-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.resultado-header p {
+    max-width: 600px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #C7CBD4;
+}
+
+.resultado-header h2 span {
+    color: #7C4DFF;
+}
+
+.resultado-acoes {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.resultado-acoes button {
+    cursor: pointer;
+    padding: 12px 32px;
+    border-radius: 999px;
+    border: none;
+    background-color: #7C4DFF;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease;
+}
+
+.resultado-acoes button:hover {
+    background-color: #6A3EF0;
+}
+
+.resultado-score {
+    width: 100%;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    justify-content: flex-start;
+}
+
+.score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 6px solid #7C4DFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-circle span {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.score-detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 16px;
+    color: #C7CBD4;
+}
+
+.score-detalhes strong {
+    color: #FFFFFF;
 }

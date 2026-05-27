@@ -248,7 +248,7 @@
         var line = document.getElementById(`line${move}`)
         var lab = check.closest('label')
 
-        if (check) {
+        if (check.checked) {
             lab.classList.add('active')
             line.style.display = 'block'
         } else {

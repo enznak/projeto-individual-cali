@@ -62,7 +62,7 @@
         </div>
 
         <div class="main-quiz" id="quiz" style="display: none;">
-            <div class="card-quiz">
+            <div class="card-quiz" id="quiz_perguntas">
                 <span id="num_atual">1/10</span>
                 <div class="question" id="questao"></div>
 
@@ -75,11 +75,40 @@
                 </div>
             </div>
 
-            <div class="card-quiz resultado1" style="display: none;">
+            <div class="card-quiz" id="resultado1" style="display: none;">
+                <div class="resultado-header">
+                    <span class="resultados">Quiz 1 concluído</span>
+                    <h2>Sua categoria dominante é <span id="span_maior"></span></h2>
+                    <p id="span_desc"></p>
+                </div>
 
+                <div class="resultado-acoes">
+                    <button onclick="voltarMenu()">Voltar ao menu</button>
+                </div>
             </div>
-            <div class="card-quiz resultado2" style="display: none;">
+            <div class="card-quiz" id="resultado2" style="display: none;">
 
+                <div class="resultado-header">
+                    <span class="resultados">Quiz 2 concluído</span>
+                    <h2>Seu desempenho no quiz</h2>
+                    <p id="texto_resumo_quiz2"></p>
+                </div>
+
+                <div class="resultado-score">
+                    <div class="score-circle">
+                        <span id="percentual_quiz2">0%</span>
+                    </div>
+
+                    <div class="score-detalhes">
+                        <p><strong>Acertos:</strong> <span id="acertos_quiz2">0</span></p>
+                        <p><strong>Erros:</strong> <span id="erros_quiz2">0</span></p>
+                        <p><strong>Total de perguntas:</strong> <span id="total_quiz2">0</span></p>
+                    </div>
+                </div>
+
+                <div class="resultado-acoes">
+                    <button onclick="voltarMenu()">Voltar ao menu</button>
+                </div>
             </div>
         </div>
     </div>
@@ -108,6 +137,9 @@
 
     let id_quiz = 0
 
+    function voltarMenu() {
+        window.location.reload()
+    }
 
     function esconderMenu() {
         menu.style.display = 'none'
@@ -244,6 +276,28 @@
         } else if (id_quiz == 2) {
             telaResultado(id_quiz)
 
+            let totalPerguntas = conhecimentos.acertos + conhecimentos.erros;
+            let percentual = totalPerguntas > 0 ? Math.round((conhecimentos.acertos / totalPerguntas) * 100) : 0;
+
+            document.getElementById("acertos_quiz2").innerHTML = conhecimentos.acertos;
+            document.getElementById("erros_quiz2").innerHTML = conhecimentos.erros;
+            document.getElementById("total_quiz2").innerHTML = totalPerguntas;
+            document.getElementById("percentual_quiz2").innerHTML = percentual + "%";
+
+            let textoResumo = "";
+
+            if (percentual == 100) {
+                textoResumo = "Perfeito! Você acertou todas as questões. Seu conhecimento em calistenia está afiado!";
+            } else if (percentual >= 70) {
+                textoResumo = "Muito bom! Você foi muito bem no quiz, mas ainda dá para lapidar alguns detalhes.";
+            } else if (percentual >= 40) {
+                textoResumo = "Bom começo! Você já tem uma base, mas vale revisar alguns conceitos da modalidade.";
+            } else {
+                textoResumo = "Você está começando na jornada. Sem problemas: reveja o conteúdo e tente novamente depois!";
+            }
+
+            document.getElementById("texto_resumo_quiz2").innerHTML = textoResumo;
+
             fetch("/quiz/quiz-conhecimento", {
                 method: "POST",
                 headers: {
@@ -274,13 +328,43 @@
     }
 
     function telaResultado(id_quiz) {
+        let maior_pontos = pontos_categoria.estatico
+        let maior_categoria = 'Estático'
+        let maior_desc = 'Você se identifica mais com movimentos de força e controle corporal, como front lever, back lever, planche e bandeira.'
+
+        if (pontos_categoria.dinamico > maior_pontos) {
+            maior_pontos = pontos_categoria.dinamico
+            maior_categoria = 'Dinâmico'
+            maior_desc = 'Seu estilo é explosivo e técnico, com foco em transições, giros, impulsão e movimentos de freestyle.'
+        }
+
+        if (pontos_categoria.carga > maior_pontos) {
+            maior_pontos = pontos_categoria.carga
+            maior_categoria = 'Carga'
+            maior_desc = 'Você curte treinar com sobrecarga, buscando força máxima em barras, dips e exercícios com peso extra.'
+        }
+
+        if (pontos_categoria.repeticao > maior_pontos) {
+            maior_pontos = pontos_categoria.repeticao
+            maior_categoria = 'Repetição'
+            maior_desc = 'Sua praia é resistência muscular, volume de treino e consistência em séries longas e desafiadoras.'
+        }
+
+        if (pontos_categoria.funcional > maior_pontos) {
+            maior_pontos = pontos_categoria.funcional
+            maior_categoria = 'Funcional'
+            maior_desc = 'Você valoriza movimento livre, mobilidade, coordenação e um corpo forte para diferentes situações.'
+        }
+
         if (id_quiz == 1) {
-            quiz.style.display = 'none'
+            quiz_perguntas.style.display = 'none'
             resultado1.style.display = 'flex'
+            span_maior.innerHTML = maior_categoria
+            span_desc.innerHTML = maior_desc
         }
 
         if (id_quiz == 2) {
-            quiz.style.display = 'none'
+            quiz_perguntas.style.display = 'none'
             resultado2.style.display = 'flex'
         }
     }

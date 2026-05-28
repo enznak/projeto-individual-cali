@@ -18,10 +18,9 @@
         <div class="navbar-container">
             <a href="./index.html"><img src="./img/logo_arise.png" alt=""></a>
             <div class="navbar">
-                <a href="./index.html">HOME</a>
-                <a href="./blog.html">BLOG</a>
-                <a href="./exercicio.html">EXERCÍCIOS</a>
-                <a href="./sobre.html">SOBRE</a>
+                <a href="../index.html">HOME</a>
+                <a href="../blog.html">BLOG</a>
+                <a href="../sobre.html">SOBRE MIM</a>
             </div>
             <div class="login">
                 <a href="./login.html" id="div_visitante">ENTRAR</a>
@@ -36,28 +35,18 @@
                     <label>Nome de usuário</label>
                     <input id="nome_input" type="text" placeholder="Digite o seu nome de usuário" class="user">
                     <span id="nm_erro0" class="erro"></span>
-                    <span id="nm_erro1" class="erro"></span>
-                    <span id="nm_erro2" class="erro"></span>
 
                     <label>E-mail</label>
                     <input id="email_input" type="text" placeholder="email@exemplo.com" class="email">
                     <span id="em_erro0" class="erro"></span>
-                    <span id="em_erro1" class="erro"></span>
-                    <span id="em_erro2" class="erro"></span>
-
 
                     <label>Senha</label>
                     <input id="senha_input" type="password" placeholder="Digite sua senha" class="password">
                     <span id="sn_erro0" class="erro"></span>
-                    <span id="sn_erro1" class="erro"></span>
-                    <span id="sn_erro2" class="erro"></span>
-
 
                     <label>Confirmar a senha</label>
                     <input id="senha2_input" type="password" placeholder="Digite sua senha novamente" class="password">
                     <span id="sn2_erro0" class="erro"></span>
-                    <span id="sn2_erro1" class="erro"></span>
-                    <span id="sn2_erro2" class="erro"></span>
 
                     <button type="submit" onclick="; limpar(); validar()">Cadastrar</button>
                     <span class="center">Já possui acesso? <a href="./login.html">Entrar na conta</a></span>
@@ -142,10 +131,10 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-
+                    window.location.href('./login.html')
                 } else {
                     sn2_erro0.style.display = 'block'
-                    sn2_erro0.innerHTML = `Nome de usuário ou e-mail inválidos.`
+                    sn2_erro0.innerHTML = `Nome de usuário ou e-mail já cadastrado(s).`
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })
@@ -158,17 +147,9 @@
 
     function limpar() {
         nm_erro0.style.display = 'none'
-        nm_erro1.style.display = 'none'
-        nm_erro2.style.display = 'none'
         em_erro0.style.display = 'none'
-        em_erro1.style.display = 'none'
-        em_erro2.style.display = 'none'
         sn_erro0.style.display = 'none'
-        sn_erro1.style.display = 'none'
-        sn_erro2.style.display = 'none'
         sn2_erro0.style.display = 'none'
-        sn2_erro1.style.display = 'none'
-        sn2_erro2.style.display = 'none'
     }
 </script>
 

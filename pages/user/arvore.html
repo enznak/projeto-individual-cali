@@ -23,8 +23,7 @@
             <div class="navbar">
                 <a href="../index.html">HOME</a>
                 <a href="../blog.html">BLOG</a>
-                <a href="../exercicio.html">EXERCÍCIOS</a>
-                <a href="../sobre.html">SOBRE</a>
+                <a href="../sobre.html">SOBRE MIM</a>
             </div>
             <div class="login">
                 <span>Olá, <span id="olausuario" style="color: #7C4DFF;">usuário</span></span>
@@ -41,186 +40,224 @@
             </div>
         </div>
         <div class="main">
-            <h2 id="titulo">ÁRVORE DE MOVIMENTOS <span style="color: rgb(146, 146, 146);">/</span> <span
+            <h2 id="titulo">ÁRVORE DE PROGRESSÃO <span style="color: rgb(146, 146, 146);">/</span> <span
                     class="arv-info">🛈<span class="info">Área de progressão: marque os movimentos desbloqueados e
                         salve-os; descubra o próximo movimento a ser desbloqueado</span></span></h2>
             <div class="tree-container" id="arvores">
                 <div class="bar">
-                    <button>REDEFINIR</button> <button onclick="salvar()">SALVAR</button>
+                    <button onclick="redefinir()">REDEFINIR</button>
+                    <button onclick="salvar()">SALVAR</button>
                 </div>
-                <div class="tree" id="arvore1">
+
+                <!-- PUSH -->
+                <div class="tree" id="push-tree">
+                    <h3 class="tree-title">PUSH</h3>
                     <svg class="lines">
                         <line x1="200" y1="275" x2="400" y2="275" />
                         <line x1="200" y1="275" x2="400" y2="125" />
                         <line x1="200" y1="275" x2="600" y2="425" />
-                        <line id="line1" x1="400" y1="275" x2="600" y2="275" style="display: none;" />
-                        <line id="line2" x1="600" y1="275" x2="800" y2="275" style="display: none;" />
-                        <line id="line3" x1="800" y1="275" x2="1000" y2="275" style="display: none;" />
-                        <line id="line2.2" x1="600" y1="425" x2="800" y2="425" style="display: none;" />
-                        <line id="line1.1" x1="400" y1="125" x2="600" y2="125" style="display: none;" />
-                        <line id="line2.1" x1="600" y1="125" x2="800" y2="125" style="display: none;" />
-                        <line id="line3.1" x1="800" y1="125" x2="1000" y2="275" style="display: none;" />
-                        <line id="line3.2" x1="800" y1="425" x2="1000" y2="275" style="display: none;" />
+                        <line id="push-line1" x1="400" y1="275" x2="600" y2="275" style="display: none;" />
+                        <line id="push-line2" x1="600" y1="275" x2="800" y2="275" style="display: none;" />
+                        <line id="push-line3" x1="800" y1="275" x2="1000" y2="275" style="display: none;" />
+                        <line id="push-line2_2" x1="600" y1="425" x2="800" y2="425" style="display: none;" />
+                        <line id="push-line1_1" x1="400" y1="125" x2="600" y2="125" style="display: none;" />
+                        <line id="push-line2_1" x1="600" y1="125" x2="800" y2="125" style="display: none;" />
+                        <line id="push-line3_1" x1="800" y1="125" x2="1000" y2="275" style="display: none;" />
+                        <line id="push-line3_2" x1="800" y1="425" x2="1000" y2="275" style="display: none;" />
                     </svg>
+
                     <div>
                         <div class="node active" style="top: 275px; left: 200px;">Push-up</div>
+
                         <label class="node" style="top: 275px; left: 400px;">
-                            <input type="checkbox" id="node1" onchange="ativarMove(1)">
+                            <input type="checkbox" id="push-node1" onchange="ativarMove('push', 1)">
                             <span>Planche Lean</span>
                         </label>
+
                         <label class="node" style="top: 125px; left: 400px;">
-                            <input type="checkbox" id="node1.1" onchange="ativarMove(1.1)">
+                            <input type="checkbox" id="push-node2" onchange="ativarMove('push', 2)">
                             <span>Planche Lean Push-up</span>
                         </label>
+
                         <label class="node" style="top: 275px; left: 600px;">
-                            <input type="checkbox" id="node2" onchange="ativarMove(2)">
+                            <input type="checkbox" id="push-node3" onchange="ativarMove('push', 3)">
                             <span>Tuck Planche</span>
                         </label>
+
                         <label class="node" style="top: 125px; left: 600px;">
-                            <input type="checkbox" id="node2.1" onchange="ativarMove(2.1)">
+                            <input type="checkbox" id="push-node4" onchange="ativarMove('push', 4)">
                             <span>Tuck Planche Push-up</span>
                         </label>
+
                         <label class="node" style="top: 425px; left: 600px;">
-                            <input type="checkbox" id="node2.2" onchange="ativarMove(2.2)">
+                            <input type="checkbox" id="push-node5" onchange="ativarMove('push', 5)">
                             <span>Tuck Planche Press</span>
                         </label>
+
                         <label class="node" style="top: 275px; left: 800px;">
-                            <input type="checkbox" id="node3" onchange="ativarMove(3)">
+                            <input type="checkbox" id="push-node6" onchange="ativarMove('push', 6)">
                             <span>Straddle Planche</span>
                         </label>
+
                         <label class="node" style="top: 125px; left: 800px;">
-                            <input type="checkbox" id="node3.1" onchange="ativarMove(3.1)">
+                            <input type="checkbox" id="push-node7" onchange="ativarMove('push', 7)">
                             <span>Straddle Planche Push-up</span>
                         </label>
+
                         <label class="node" style="top: 425px; left: 800px;">
-                            <input type="checkbox" id="node3.2" onchange="ativarMove(3.2)">
+                            <input type="checkbox" id="push-node8" onchange="ativarMove('push', 8)">
                             <span>Straddle Planche Press</span>
                         </label>
 
                         <label class="node" style="top: 275px; left: 1000px;">
-                            <input type="checkbox" id="node4" onchange="ativarMove(4)">
+                            <input type="checkbox" id="push-node9" onchange="ativarMove('push', 9)">
                             <span>Full Planche</span>
                         </label>
                     </div>
+                </div>
 
-                    <div class="tree tree2" id="arvore1">
-                        <svg class="lines">
-                            <line x1="200" y1="275" x2="400" y2="275" />
-                            <line x1="200" y1="275" x2="400" y2="125" />
-                            <line x1="200" y1="275" x2="600" y2="425" />
-                            <line id="line1" x1="400" y1="275" x2="600" y2="275" style="display: none;" />
-                            <line id="line2" x1="600" y1="275" x2="800" y2="275" style="display: none;" />
-                            <line id="line3" x1="800" y1="275" x2="1000" y2="275" style="display: none;" />
-                            <line id="line2.2" x1="600" y1="425" x2="800" y2="425" style="display: none;" />
-                            <line id="line1.1" x1="400" y1="125" x2="600" y2="125" style="display: none;" />
-                            <line id="line2.1" x1="600" y1="125" x2="800" y2="125" style="display: none;" />
-                            <line id="line3.1" x1="800" y1="125" x2="1000" y2="275" style="display: none;" />
-                            <line id="line3.2" x1="800" y1="425" x2="1000" y2="275" style="display: none;" />
-                        </svg>
-                        <div>
-                            <div class="node active" style="top: 275px; left: 200px;">Push-up</div>
-                            <label class="node" style="top: 275px; left: 400px;">
-                                <input type="checkbox" id="node1" onchange="ativarMove(1)">
-                                <span>Planche Lean</span>
-                            </label>
-                            <label class="node" style="top: 125px; left: 400px;">
-                                <input type="checkbox" id="node1.1" onchange="ativarMove(1.1)">
-                                <span>Planche Lean Push-up</span>
-                            </label>
-                            <label class="node" style="top: 275px; left: 600px;">
-                                <input type="checkbox" id="node2" onchange="ativarMove(2)">
-                                <span>Tuck Planche</span>
-                            </label>
-                            <label class="node" style="top: 125px; left: 600px;">
-                                <input type="checkbox" id="node2.1" onchange="ativarMove(2.1)">
-                                <span>Tuck Planche Push-up</span>
-                            </label>
-                            <label class="node" style="top: 425px; left: 600px;">
-                                <input type="checkbox" id="node2.2" onchange="ativarMove(2.2)">
-                                <span>Tuck Planche Press</span>
-                            </label>
-                            <label class="node" style="top: 275px; left: 800px;">
-                                <input type="checkbox" id="node3" onchange="ativarMove(3)">
-                                <span>Straddle Planche</span>
-                            </label>
-                            <label class="node" style="top: 125px; left: 800px;">
-                                <input type="checkbox" id="node3.1" onchange="ativarMove(3.1)">
-                                <span>Straddle Planche Push-up</span>
-                            </label>
-                            <label class="node" style="top: 425px; left: 800px;">
-                                <input type="checkbox" id="node3.2" onchange="ativarMove(3.2)">
-                                <span>Straddle Planche Press</span>
-                            </label>
+                <!-- PULL -->
+                <div class="tree" id="pull-tree">
+                    <h3 class="tree-title">PULL</h3>
+                    <svg class="lines">
+                        <line x1="200" y1="275" x2="400" y2="275" />
+                        <line x1="200" y1="275" x2="400" y2="125" />
+                        <line x1="200" y1="275" x2="600" y2="425" />
+                        <line id="pull-line1" x1="400" y1="275" x2="600" y2="275" style="display: none;" />
+                        <line id="pull-line2" x1="600" y1="275" x2="800" y2="275" style="display: none;" />
+                        <line id="pull-line3" x1="800" y1="275" x2="1000" y2="275" style="display: none;" />
+                        <line id="pull-line2_2" x1="600" y1="425" x2="800" y2="425" style="display: none;" />
+                        <line id="pull-line1_1" x1="400" y1="125" x2="600" y2="125" style="display: none;" />
+                        <line id="pull-line2_1" x1="600" y1="125" x2="800" y2="125" style="display: none;" />
+                        <line id="pull-line3_1" x1="800" y1="125" x2="1000" y2="275" style="display: none;" />
+                        <line id="pull-line3_2" x1="800" y1="425" x2="1000" y2="275" style="display: none;" />
+                    </svg>
 
-                            <label class="node" style="top: 275px; left: 1000px;">
-                                <input type="checkbox" id="node4" onchange="ativarMove(4)">
-                                <span>Full Planche</span>
-                            </label>
-                        </div>
+                    <div>
+                        <div class="node active" style="top: 275px; left: 200px;">Australian Pull-up</div>
 
-                        <div class="tree tree3" id="arvore1">
-                            <svg class="lines">
-                                <line x1="200" y1="275" x2="400" y2="275" />
-                                <line x1="200" y1="275" x2="400" y2="125" />
-                                <line x1="200" y1="275" x2="600" y2="425" />
-                                <line id="line1" x1="400" y1="275" x2="600" y2="275" style="display: none;" />
-                                <line id="line2" x1="600" y1="275" x2="800" y2="275" style="display: none;" />
-                                <line id="line3" x1="800" y1="275" x2="1000" y2="275" style="display: none;" />
-                                <line id="line2.2" x1="600" y1="425" x2="800" y2="425" style="display: none;" />
-                                <line id="line1.1" x1="400" y1="125" x2="600" y2="125" style="display: none;" />
-                                <line id="line2.1" x1="600" y1="125" x2="800" y2="125" style="display: none;" />
-                                <line id="line3.1" x1="800" y1="125" x2="1000" y2="275" style="display: none;" />
-                                <line id="line3.2" x1="800" y1="425" x2="1000" y2="275" style="display: none;" />
-                            </svg>
-                            <div>
-                                <div class="node active" style="top: 275px; left: 200px;">Push-up</div>
-                                <label class="node" style="top: 275px; left: 400px;">
-                                    <input type="checkbox" id="node1" onchange="ativarMove(1)">
-                                    <span>Planche Lean</span>
-                                </label>
-                                <label class="node" style="top: 125px; left: 400px;">
-                                    <input type="checkbox" id="node1.1" onchange="ativarMove(1.1)">
-                                    <span>Planche Lean Push-up</span>
-                                </label>
-                                <label class="node" style="top: 275px; left: 600px;">
-                                    <input type="checkbox" id="node2" onchange="ativarMove(2)">
-                                    <span>Tuck Planche</span>
-                                </label>
-                                <label class="node" style="top: 125px; left: 600px;">
-                                    <input type="checkbox" id="node2.1" onchange="ativarMove(2.1)">
-                                    <span>Tuck Planche Push-up</span>
-                                </label>
-                                <label class="node" style="top: 425px; left: 600px;">
-                                    <input type="checkbox" id="node2.2" onchange="ativarMove(2.2)">
-                                    <span>Tuck Planche Press</span>
-                                </label>
-                                <label class="node" style="top: 275px; left: 800px;">
-                                    <input type="checkbox" id="node3" onchange="ativarMove(3)">
-                                    <span>Straddle Planche</span>
-                                </label>
-                                <label class="node" style="top: 125px; left: 800px;">
-                                    <input type="checkbox" id="node3.1" onchange="ativarMove(3.1)">
-                                    <span>Straddle Planche Push-up</span>
-                                </label>
-                                <label class="node" style="top: 425px; left: 800px;">
-                                    <input type="checkbox" id="node3.2" onchange="ativarMove(3.2)">
-                                    <span>Straddle Planche Press</span>
-                                </label>
+                        <label class="node" style="top: 275px; left: 400px;">
+                            <input type="checkbox" id="pull-node1" onchange="ativarMove('pull', 1)">
+                            <span>Pull-up</span>
+                        </label>
 
-                                <label class="node" style="top: 275px; left: 1000px;">
-                                    <input type="checkbox" id="node4" onchange="ativarMove(4)">
-                                    <span>Full Planche</span>
-                                </label>
-                            </div>
-                        </div>
+                        <label class="node" style="top: 125px; left: 400px;">
+                            <input type="checkbox" id="pull-node2" onchange="ativarMove('pull', 2)">
+                            <span>Chest to Bar Pull-up</span>
+                        </label>
+
+                        <label class="node" style="top: 275px; left: 600px;">
+                            <input type="checkbox" id="pull-node3" onchange="ativarMove('pull', 3)">
+                            <span>Explosive Pull-up</span>
+                        </label>
+
+                        <label class="node" style="top: 125px; left: 600px;">
+                            <input type="checkbox" id="pull-node4" onchange="ativarMove('pull', 4)">
+                            <span>Archer Pull-up</span>
+                        </label>
+
+                        <label class="node" style="top: 425px; left: 600px;">
+                            <input type="checkbox" id="pull-node5" onchange="ativarMove('pull', 5)">
+                            <span>Typewriter Pull-up</span>
+                        </label>
+
+                        <label class="node" style="top: 275px; left: 800px;">
+                            <input type="checkbox" id="pull-node6" onchange="ativarMove('pull', 6)">
+                            <span>Muscle-up</span>
+                        </label>
+
+                        <label class="node" style="top: 125px; left: 800px;">
+                            <input type="checkbox" id="pull-node7" onchange="ativarMove('pull', 7)">
+                            <span>Front Lever Tuck</span>
+                        </label>
+
+                        <label class="node" style="top: 425px; left: 800px;">
+                            <input type="checkbox" id="pull-node8" onchange="ativarMove('pull', 8)">
+                            <span>Front Lever Advanced Tuck</span>
+                        </label>
+
+                        <label class="node" style="top: 275px; left: 1000px;">
+                            <input type="checkbox" id="pull-node9" onchange="ativarMove('pull', 9)">
+                            <span>Front Lever</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- BALANCE -->
+                <div class="tree" id="balance-tree">
+                    <h3 class="tree-title">BALANCE</h3>
+                    <svg class="lines">
+                        <line x1="200" y1="275" x2="400" y2="275" />
+                        <line x1="200" y1="275" x2="400" y2="125" />
+                        <line x1="200" y1="275" x2="600" y2="425" />
+                        <line id="balance-line1" x1="400" y1="275" x2="600" y2="275" style="display: none;" />
+                        <line id="balance-line2" x1="600" y1="275" x2="800" y2="275" style="display: none;" />
+                        <line id="balance-line3" x1="800" y1="275" x2="1000" y2="275" style="display: none;" />
+                        <line id="balance-line2_2" x1="600" y1="425" x2="800" y2="425" style="display: none;" />
+                        <line id="balance-line1_1" x1="400" y1="125" x2="600" y2="125" style="display: none;" />
+                        <line id="balance-line2_1" x1="600" y1="125" x2="800" y2="125" style="display: none;" />
+                        <line id="balance-line3_1" x1="800" y1="125" x2="1000" y2="275" style="display: none;" />
+                        <line id="balance-line3_2" x1="800" y1="425" x2="1000" y2="275" style="display: none;" />
+                    </svg>
+
+                    <div>
+                        <div class="node active" style="top: 275px; left: 200px;">Frog Stand</div>
+
+                        <label class="node" style="top: 275px; left: 400px;">
+                            <input type="checkbox" id="balance-node1" onchange="ativarMove('balance', 1)">
+                            <span>Crow Pose</span>
+                        </label>
+
+                        <label class="node" style="top: 125px; left: 400px;">
+                            <input type="checkbox" id="balance-node2" onchange="ativarMove('balance', 2)">
+                            <span>Tripod Headstand</span>
+                        </label>
+
+                        <label class="node" style="top: 275px; left: 600px;">
+                            <input type="checkbox" id="balance-node3" onchange="ativarMove('balance', 3)">
+                            <span>Headstand</span>
+                        </label>
+
+                        <label class="node" style="top: 125px; left: 600px;">
+                            <input type="checkbox" id="balance-node4" onchange="ativarMove('balance', 4)">
+                            <span>Wall Handstand</span>
+                        </label>
+
+                        <label class="node" style="top: 425px; left: 600px;">
+                            <input type="checkbox" id="balance-node5" onchange="ativarMove('balance', 5)">
+                            <span>Elbow Stand</span>
+                        </label>
+
+                        <label class="node" style="top: 275px; left: 800px;">
+                            <input type="checkbox" id="balance-node6" onchange="ativarMove('balance', 6)">
+                            <span>Handstand</span>
+                        </label>
+
+                        <label class="node" style="top: 125px; left: 800px;">
+                            <input type="checkbox" id="balance-node7" onchange="ativarMove('balance', 7)">
+                            <span>Handstand Push-up Negativa</span>
+                        </label>
+
+                        <label class="node" style="top: 425px; left: 800px;">
+                            <input type="checkbox" id="balance-node8" onchange="ativarMove('balance', 8)">
+                            <span>Press to Handstand</span>
+                        </label>
+
+                        <label class="node" style="top: 275px; left: 1000px;">
+                            <input type="checkbox" id="balance-node9" onchange="ativarMove('balance', 9)">
+                            <span>Handstand Push-up</span>
+                        </label>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
 </body>
 
 <script>
     window.onload = nomeUsuario()
+    window.onload = buscarArvore()
 
     var push_moves = [
         { pup: true },
@@ -235,41 +272,167 @@
         { pFull: false }
     ]
 
-    var pull_moves = {
+    var pull_moves = [
+        { base: true },
+        { pullUp: false },
+        { chestBar: false },
+        { explosive: false },
+        { archer: false },
+        { typewriter: false },
+        { muscleUp: false },
+        { flTuck: false },
+        { flAdvTuck: false },
+        { frontLever: false }
+    ];
 
+    var balance_moves = [
+        { base: true },
+        { crow: false },
+        { tripod: false },
+        { headstand: false },
+        { wallHs: false },
+        { elbowStand: false },
+        { handstand: false },
+        { hsNeg: false },
+        { pressHs: false },
+        { hspu: false }
+    ];
+
+    var res = []
+
+    function buscarArvore() {
+        var idUsuario = sessionStorage.ID_USUARIO
+        fetch(`/arvore/buscarMovimentos/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(resposta)
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    res = resposta
+                    atualizarMoves()
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
     }
 
-    var balance_moves = {
+    function atualizarMoves() {
+        // PUSH: movimentos 0-9 no array res → nodes 1-9 no HTML
+        for (let i = 1; i <= 9; i++) {
+            const checkbox = document.getElementById(`push-node${i}`);
+            if (checkbox && res[i]) {
+                checkbox.checked = res[i].desbloqueado == 1;
+                if (checkbox.checked) {
+                    checkbox.closest('label').classList.add('active');
+                    const line = document.getElementById(`push-line${i}`);
+                    if (line) line.style.display = 'block';
+                }
+            }
+        }
 
+        // PULL: movimentos 10-19 no array res → nodes 1-9 no HTML
+        for (let i = 1; i <= 9; i++) {
+            const checkbox = document.getElementById(`pull-node${i}`);
+            const resIndex = i + 10;
+            if (checkbox && res[resIndex]) {
+                checkbox.checked = res[resIndex].desbloqueado == 1;
+                if (checkbox.checked) {
+                    checkbox.closest('label').classList.add('active');
+                    const line = document.getElementById(`pull-line${i}`);
+                    if (line) line.style.display = 'block';
+                }
+            }
+        }
+
+        // BALANCE: movimentos 20-29 no array res → nodes 1-9 no HTML
+        for (let i = 1; i <= 9; i++) {
+            const checkbox = document.getElementById(`balance-node${i}`);
+            const resIndex = i + 20;
+            if (checkbox && res[resIndex]) {
+                checkbox.checked = res[resIndex].desbloqueado == 1;
+                if (checkbox.checked) {
+                    checkbox.closest('label').classList.add('active');
+                    const line = document.getElementById(`balance-line${i}`);
+                    if (line) line.style.display = 'block';
+                }
+            }
+        }
     }
 
-    function ativarMove(move) {
-        var check = document.getElementById(`node${move}`)
-        var line = document.getElementById(`line${move}`)
-        var lab = check.closest('label')
+    function ativarMove(tipo, move) {
+        const check = document.getElementById(`${tipo}-node${move}`);
+        const line = document.getElementById(`${tipo}-line${move}`);
+        const lab = check.closest('label');
 
         if (check.checked) {
-            lab.classList.add('active')
-            line.style.display = 'block'
+            lab.classList.add('active');
+            if (line) line.style.display = 'block';
         } else {
-            lab.classList.remove('active')
-            line.style.display = 'none'
+            lab.classList.remove('active');
+            if (line) line.style.display = 'none';
+        }
+    }
+
+    function redefinir() {
+        var checks = document.querySelectorAll('.tree input[type="checkbox"]');
+        var labels = document.querySelectorAll('.tree label.node');
+        var lines = document.querySelectorAll('.tree .lines line[id]');
+
+        for (let i = 0; i < checks.length; i++) {
+            checks[i].checked = false;
+        }
+
+        for (let i = 0; i < labels.length; i++) {
+            labels[i].classList.remove('active');
+        }
+
+        for (let i = 0; i < lines.length; i++) {
+            lines[i].style.display = 'none';
         }
     }
 
     function salvar() {
         push_moves = [
             { pup: true },
-            { pLean: document.getElementById('node1').checked },
-            { pLeanPU: document.getElementById('node1.1').checked },
-            { pTuck: document.getElementById('node2').checked },
-            { pTuckPU: document.getElementById('node2.1').checked },
-            { pTuckP: document.getElementById('node2.2').checked },
-            { pStraddle: document.getElementById('node3').checked },
-            { pStraddlePU: document.getElementById('node3.1').checked },
-            { pStraddleP: document.getElementById('node3.2').checked },
-            { pFull: document.getElementById('node4').checked }
-        ]
+            { pLean: document.getElementById('push-node1').checked },
+            { pLeanPU: document.getElementById('push-node2').checked },
+            { pTuck: document.getElementById('push-node3').checked },
+            { pTuckPU: document.getElementById('push-node4').checked },
+            { pTuckP: document.getElementById('push-node5').checked },
+            { pStraddle: document.getElementById('push-node6').checked },
+            { pStraddlePU: document.getElementById('push-node7').checked },
+            { pStraddleP: document.getElementById('push-node8').checked },
+            { pFull: document.getElementById('push-node9').checked }
+        ];
+
+        pull_moves = [
+            { base: true },
+            { pullUp: document.getElementById('pull-node1').checked },
+            { chestBar: document.getElementById('pull-node2').checked },
+            { explosive: document.getElementById('pull-node3').checked },
+            { archer: document.getElementById('pull-node4').checked },
+            { typewriter: document.getElementById('pull-node5').checked },
+            { muscleUp: document.getElementById('pull-node6').checked },
+            { flTuck: document.getElementById('pull-node7').checked },
+            { flAdvTuck: document.getElementById('pull-node8').checked },
+            { frontLever: document.getElementById('pull-node9').checked }
+        ];
+
+        balance_moves = [
+            { base: true },
+            { crow: document.getElementById('balance-node1').checked },
+            { tripod: document.getElementById('balance-node2').checked },
+            { headstand: document.getElementById('balance-node3').checked },
+            { wallHs: document.getElementById('balance-node4').checked },
+            { elbowStand: document.getElementById('balance-node5').checked },
+            { handstand: document.getElementById('balance-node6').checked },
+            { hsNeg: document.getElementById('balance-node7').checked },
+            { pressHs: document.getElementById('balance-node8').checked },
+            { hspu: document.getElementById('balance-node9').checked }
+        ];
 
         var pushVar = push_moves
         var pullVar = pull_moves

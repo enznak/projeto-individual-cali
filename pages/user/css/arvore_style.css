@@ -40,25 +40,31 @@
 
 .tree-container {
     display: flex;
+    flex-direction: column;
+    gap: 40px;
     max-width: 1200px;
     min-height: 800px;
-    box-shadow: 0 0 0px black;
     background-color: #171A1F;
-    overflow: scroll;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 80px 20px 40px;
+    position: relative;
+}
+
+.tree-title {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    color: #7C4DFF;
+    letter-spacing: 2px;
+    font-size: 22px;
 }
 
 .tree {
     position: relative;
     width: 1200px;
-    height: 430px;
-}
-
-.tree2 {
-    transform: translateY(450px);
-}
-
-.tree3 {
-    transform: translateY(450px);
+    min-height: 500px;
+    border-top: 1px solid #2a2d33;
 }
 
 .lines {
@@ -93,8 +99,7 @@
     display: none;
 }
 
-.node:hover {
-}
+.node:hover {}
 
 .node.active {
     background-color: #6A3EF0;
@@ -102,13 +107,26 @@
 
 .bar {
     display: flex;
-    position: absolute;
-    z-index: 1;
+    gap: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: #171A1F;
+    padding-bottom: 10px;
 }
 
 .bar button {
-    width: 100px;
+    width: 120px;
     height: 40px;
+    border: none;
+    color: white;
+    background-color: #6A3EF0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.bar button:hover {
+    background-color: #592FD1;
 }
 
 .arv-info {
@@ -125,7 +143,7 @@
     height: 160px;
     background-color: #171A1F;
     overflow: hidden;
-    z-index: 1;
+    z-index: 10;
     line-height: 1.5em;
     opacity: 0;
     visibility: hidden;

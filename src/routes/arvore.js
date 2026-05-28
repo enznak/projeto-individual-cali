@@ -7,4 +7,8 @@ router.post("/movimentos-usuario", function (req, res) {
     arvoreController.inserirMovimentos(req, res);
 });
 
+router.get("/buscarMovimentos/:idUsuario", function (req, res) {
+    arvoreController.buscarArvore(req, res);
+});
+
 module.exports = router;

@@ -27,10 +27,6 @@ create table pontos_categoria (
     constraint pcComposta primary key (id, id_usuario)
 );
 
-select * from pontos_categoria;
-
-drop table pontos_categoria;
-
 create table resultados_quiz (
 	id_quiz int,
     constraint fkQuizQuiz foreign key (id_quiz) references quizzes(id),
@@ -40,8 +36,6 @@ create table resultados_quiz (
     erros decimal(2,0),
     primary key (id_quiz, id_usuario)
 );
-
-select * from resultados_quiz;
 
 create table perguntas (
 	id int primary key auto_increment,
@@ -59,8 +53,9 @@ create table perguntas (
 create table movimentos (
 id int primary key auto_increment,
 nome varchar(45),
-categoria varchar(8),
-constraint chkCat check (categoria in('push','pull','balance','dinamico'))
+tipo varchar(8),
+categoria varchar(13),
+constraint chkCat check (tipo in('push','pull','balance','dinamico'))
 );
 
 create table movimentos_usuario (
@@ -73,11 +68,116 @@ create table movimentos_usuario (
     desbloqueado bool
 );
 
+create table artigos (
+id int primary key auto_increment,
+autor int,
+foreign key (autor) references usuarios(id),
+tag varchar(20),
+titulo varchar(100),
+subtitulo varchar(200),
+p1 varchar(1000),
+p2 varchar(1000),
+p3 varchar(1000)
+);
+
+CREATE VIEW vw_kpi AS
+SELECT
+    mu.id_usuario AS usuario,
+    SUM(mu.desbloqueado) AS total,
+    
+    (
+        SELECT m2.categoria
+        FROM movimentos_usuario mu2
+        JOIN movimentos m2 ON mu2.id_movimento = m2.id
+        WHERE mu2.id_usuario = usuario
+          AND mu2.desbloqueado = 1
+        ORDER BY
+            CASE m2.categoria
+                WHEN 'iniciante' THEN 1
+                WHEN 'intermediario' THEN 2
+                WHEN 'avançado' THEN 3
+                WHEN 'elite' THEN 4
+                ELSE 0
+            END DESC
+        LIMIT 1
+    ) AS nivel,
+    (
+		SELECT m2.categoria
+        FROM movimentos_usuario mu2
+        JOIN movimentos m2 ON mu2.id_movimento = m2.id
+        WHERE mu2.id_usuario = usuario
+          AND mu2.desbloqueado = 1
+          AND m2.tipo = 'push'
+        ORDER BY
+            CASE m2.categoria
+                WHEN 'iniciante' THEN 1
+                WHEN 'intermediario' THEN 2
+                WHEN 'avançado' THEN 3
+                WHEN 'elite' THEN 4
+                ELSE 0
+            END DESC
+        LIMIT 1
+    ) AS push,
+    (
+		SELECT m2.categoria
+        FROM movimentos_usuario mu2
+        JOIN movimentos m2 ON mu2.id_movimento = m2.id
+        WHERE mu2.id_usuario = usuario
+          AND mu2.desbloqueado = 1
+          AND m2.tipo = 'pull'
+        ORDER BY
+            CASE m2.categoria
+                WHEN 'iniciante' THEN 1
+                WHEN 'intermediario' THEN 2
+                WHEN 'avançado' THEN 3
+                WHEN 'elite' THEN 4
+                ELSE 0
+            END DESC
+        LIMIT 1
+        ) as pull,
+	(
+		SELECT m2.categoria
+        FROM movimentos_usuario mu2
+        JOIN movimentos m2 ON mu2.id_movimento = m2.id
+        WHERE mu2.id_usuario = usuario
+          AND mu2.desbloqueado = 1
+          AND m2.tipo = 'balance'
+        ORDER BY
+            CASE m2.categoria
+                WHEN 'iniciante' THEN 1
+                WHEN 'intermediario' THEN 2
+                WHEN 'avançado' THEN 3
+                WHEN 'elite' THEN 4
+                ELSE 0
+            END DESC
+        LIMIT 1
+    ) as balance,
+    (
+		select sum(rq.acertos)
+        from resultados_quiz rq
+        where rq.id_usuario = usuario
+    ) as acertos,
+	(
+		select sum(rq.erros)
+        from resultados_quiz rq
+        where rq.id_usuario = usuario
+    ) as erros
+FROM movimentos_usuario mu
+WHERE mu.desbloqueado = 1
+GROUP BY mu.id_usuario;
+
+select * from movimentos_usuario where id_usuario = 1;
+
 create view vw_categoria as select id, id_usuario as usuario, estatico, dinamico, carga, repeticao, funcional from pontos_categoria;
 select * from pontos_categoria;
 
+create view vw_movimentos as select id_movimento as movimento, desbloqueado from movimentos_usuario;
+drop view vw_movimentos;
+
 create view vw_quizperguntas as select id_quiz as quiz, pergunta, opcaoA, opcaoB, opcaoC, opcaoD, opcaoE, correta from perguntas;
 drop view vw_quizperguntas;
+
+create view vw_artigos as select id, autor, tag, titulo, subtitulo, p1, p2, p3 from artigos;
 
 insert into usuarios values
 (default, 'nick', 'nick@gmail.com', 'nicknick123', true);
@@ -116,13 +216,51 @@ insert into perguntas values
 (default, 2, 'Qual destes fatores mais influencia sua evolução na calistenia?', 'Treinar uma vez por mês muito forte', 'Treinar sem descanso', 'Consistência ao longo do tempo', 'Evitar exercícios básicos', 'Treinar sem planejamento', 'C');
 
 insert into movimentos values
-(default, 'pushup', 'push'),
-(default, 'planchelean', 'push'),
-(default, 'plancheleanpu', 'push'),
-(default, 'planchetuck', 'push'),
-(default, 'planchetuckpu', 'push'),
-(default, 'planchetuckp', 'push'),
-(default, 'planchestraddle', 'push'),
-(default, 'planchestraddlepu', 'push'),
-(default, 'planchestraddlep', 'push'),
-(default, 'planchefull', 'push');
+(default, 'pushup', 'push', 'iniciante'),
+(default, 'planchelean', 'push', 'iniciante'),
+(default, 'plancheleanpu', 'push', 'iniciante'),
+(default, 'planchetuck', 'push', 'intermediario'),
+(default, 'planchetuckpu', 'push', 'intermediario'),
+(default, 'planchetuckp', 'push', 'intermediario'),
+(default, 'planchestraddle', 'push', 'avançado'),
+(default, 'planchestraddlepu', 'push', 'avançado'),
+(default, 'planchestraddlep', 'push', 'avançado'),
+(default, 'planchefull', 'push', 'elite');
+
+insert into movimentos values
+(default, 'australianpullup', 'pull', 'iniciante'),
+(default, 'pullup', 'pull', 'iniciante'),
+(default, 'chesttobarpullup', 'pull', 'iniciante'),
+(default, 'explosivepullup', 'pull', 'intermediario'),
+(default, 'archerpullup', 'pull', 'intermediario'),
+(default, 'typewriterpullup', 'pull', 'intermediario'),
+(default, 'muscleup', 'pull', 'avançado'),
+(default, 'frontlevertuck', 'pull', 'avançado'),
+(default, 'frontleveradvancedtuck', 'pull', 'avançado'),
+(default, 'frontleverfull', 'pull', 'elite');
+
+insert into movimentos values
+(default, 'frogstand', 'balance', 'iniciante'),
+(default, 'crowpose', 'balance', 'iniciante'),
+(default, 'tripodheadstand', 'balance', 'iniciante'),
+(default, 'headstand', 'balance', 'intermediario'),
+(default, 'wallhandstand', 'balance', 'intermediario'),
+(default, 'elbowstand', 'balance', 'intermediario'),
+(default, 'handstand', 'balance', 'avançado'),
+(default, 'handstandpushupnegativa', 'balance', 'avançado'),
+(default, 'presstohandstand', 'balance', 'avançado'),
+(default, 'handstandpushup', 'balance', 'elite');
+
+insert into artigos values
+(default, 1, 'INICIANTES', 'Os benefícios da calistenia para iniciantes', 'Comece de forma simples e descubra como o peso do próprio corpo pode transformar seu treino.',
+'A calistenia é uma forma de treino que vem ganhando cada vez mais espaço entre pessoas que buscam uma maneira prática, acessível e eficiente de se exercitar. Por utilizar o peso do próprio corpo, ela permite que o praticante desenvolva força, controle e mobilidade sem depender de equipamentos complexos, o que torna o início da prática muito mais simples e democrático. Para quem está começando, isso representa uma grande vantagem, já que é possível adaptar os exercícios ao próprio ritmo e construir uma base sólida desde os primeiros treinos.',
+'Outro benefício importante da calistenia é que ela trabalha o corpo de forma integrada, estimulando não apenas os músculos, mas também a coordenação, o equilíbrio e a consciência corporal. Movimentos como flexões, agachamentos, barras e pranchas ajudam a desenvolver um condicionamento mais completo, porque envolvem diferentes grupos musculares ao mesmo tempo. Isso faz com que o treino seja funcional e contribua não só para a estética, mas também para a melhora da postura, da resistência e da qualidade de movimento no dia a dia.',
+'Com o passar do tempo, a prática constante mostra resultados que vão além da parte física. O praticante passa a perceber mais disposição, mais confiança e uma evolução gradual que motiva a continuar treinando. Por isso, a calistenia é uma excelente escolha para iniciantes que querem transformar o exercício em hábito, evoluir com segurança e descobrir como pequenas conquistas ao longo do caminho podem fazer toda a diferença.'),
+(default, 1, 'MULHERES', 'Força e evolução das mulheres na calistenia', 'Organize seus exercícios e evolua com consistência, segurança e equilíbrio.',
+'A calistenia tem se tornado uma prática cada vez mais presente na rotina de muitas mulheres, principalmente por oferecer liberdade, versatilidade e um caminho claro de evolução. Ao contrário de ideias antigas que associavam certos tipos de treino apenas ao público masculino, hoje fica cada vez mais evidente que a calistenia é uma modalidade completa, capaz de atender diferentes objetivos e perfis. Ela permite que cada mulher avance no seu tempo, respeitando seus limites e construindo resultados de forma consistente.',
+'Além de fortalecer o corpo, a calistenia ajuda no desenvolvimento da confiança, da disciplina e da autonomia. Treinar com o próprio peso corporal faz com que a praticante perceba melhor seus movimentos, entenda suas capacidades e conquiste maior controle sobre o corpo. Exercícios adaptáveis também tornam a prática acessível em diferentes contextos, seja em casa, ao ar livre ou em ambientes com estrutura mais simples. Isso amplia as possibilidades e faz com que o treino se encaixe melhor na rotina.',
+'Outro ponto que torna a calistenia tão especial para mulheres é o impacto que ela gera para além do treino. Cada conquista, seja uma repetição a mais, uma variação mais difícil ou uma melhora na postura, contribui para fortalecer a sensação de progresso e superação. Essa evolução contínua inspira não só quem pratica, mas também outras mulheres que passam a enxergar na calistenia uma forma de cuidar do corpo, da mente e da própria autoestima ao mesmo tempo.'),
+(default, 1, 'ROTINA', 'Como montar uma rotina de treino de calistenia', 'Força, autonomia e evolução em uma modalidade que se adapta a diferentes objetivos e níveis.',
+'Montar uma rotina de calistenia de forma organizada é um dos passos mais importantes para quem deseja evoluir com segurança e manter a constância nos treinos. Quando existe uma estrutura bem pensada, fica mais fácil equilibrar os exercícios, acompanhar o progresso e evitar a sensação de estar treinando sem direção. Uma rotina eficiente costuma incluir movimentos de empurrar, puxar, pernas e core, garantindo que o corpo seja trabalhado de maneira completa e equilibrada.',
+'Para quem está começando, o ideal é não tentar fazer tudo de uma vez. O melhor caminho é iniciar com exercícios mais simples, poucas repetições e foco total na execução correta. Flexões adaptadas, agachamentos, prancha, barras assistidas e outros movimentos básicos já são suficientes para construir uma boa base. Conforme o corpo vai se adaptando, é possível aumentar a intensidade aos poucos, o que torna o processo mais seguro e evita frustrações no início da jornada.',
+'Com o tempo, uma boa rotina deixa de ser apenas uma sequência de exercícios e passa a se tornar parte do estilo de vida. A regularidade cria disciplina, o descanso adequado ajuda na recuperação muscular e a progressão gradual permite que o praticante evolua sem exageros. Dessa forma, a calistenia se transforma em um treino sustentável, eficiente e motivador, ideal para quem busca resultados reais sem abrir mão da praticidade.');

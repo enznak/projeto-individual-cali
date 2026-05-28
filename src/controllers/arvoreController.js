@@ -6,7 +6,7 @@ function inserirMovimentos(req, res) {
     var pull_moves = req.body.pullServer;
     var balance_moves = req.body.balanceServer;
 
-    arvoreModel.inserirMovimentosPull(IdUsuario, push_moves)
+    arvoreModel.inserirMovimentos(IdUsuario, push_moves, pull_moves, balance_moves)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -21,6 +21,22 @@ function inserirMovimentos(req, res) {
             });
 }
 
+function buscarArvore(req, res) {
+    var usuario = req.params.idUsuario;
+    arvoreModel.buscarArvore(usuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
-    inserirMovimentos
+    inserirMovimentos,
+    buscarArvore
 }

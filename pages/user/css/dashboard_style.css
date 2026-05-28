@@ -8,11 +8,11 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 150px 600px 300px;
+    grid-template-rows: 150px 600px 150px;
     grid-template-areas:
         "chart1 chart1 chart1 chart1 chart2 chart2 chart2 chart2 chart3 chart3 chart3 chart3"
         "chart4 chart4 chart4 chart4 chart4 chart4 chart4 chart4 chart5 chart5 chart5 chart5"
-        "chart6 chart6 chart6 chart7 chart7 chart7 chart8 chart8 chart8 chart8 chart8 chart8";
+        "chart6 chart6 chart6 chart6 chart6 chart6 chart7 chart7 chart7 chart7 chart7 chart7";
     gap: 16px;
 }
 

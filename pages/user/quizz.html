@@ -23,8 +23,7 @@
             <div class="navbar">
                 <a href="../index.html">HOME</a>
                 <a href="../blog.html">BLOG</a>
-                <a href="../exercicio.html">EXERCÍCIOS</a>
-                <a href="../sobre.html">SOBRE</a>
+                <a href="../sobre.html">SOBRE MIM</a>
             </div>
             <div class="login">
                 <span>Olá, <span id="olausuario" style="color: #7C4DFF;">usuário</span></span>
@@ -40,7 +39,6 @@
                 <a class="item" onclick="limparSessao()"><img src="../img/logout.png" alt=""></a>
             </div>
         </div>
-        <div class="thumb" id="thumbnail"></div>
         <div class="main" id="menu">
             <div class="card">
                 <div class="subcard1 thumb1"></div>
@@ -143,18 +141,10 @@
 
     function esconderMenu() {
         menu.style.display = 'none'
-        thumbnail.style.display = 'none'
     }
 
     function iniciarQuiz(idQuiz) {
         id_quiz = idQuiz
-        pontos_categoria = {
-            estatico: 0,
-            dinamico: 0,
-            carga: 0,
-            repeticao: 0,
-            funcional: 0
-        }
 
         questao_atual = 0
 

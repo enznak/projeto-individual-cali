@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     background-color: #111315;
-    min-height: 100vh;
+    min-height: 120vh;
 }
 
 .main h1 {
@@ -22,28 +22,38 @@
     font-size: 48px;
 }
 
-.main h2 {
-    color: white;
-}
-
-.main h3 {
-    color: #cfcfcf;
-}
-
-.main p {
-    color: white;
-}
-
-.main img {
+.thumb {
     position: relative;
     top: 80px;
     width: 100%;
-    height: 500px;
+    height: 600px;
     background-color: black;
 }
 
-.tags {
+.thumb1 {
+    background: url(../img/flag2.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
+.thumb2 {
+    background: url(../img/fmplanch.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.thumb3 {
+    background: url(../img/flagpole.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.tags {
+    color: #6A3EF0;
+    letter-spacing: 2px;
 }
 
 .title {
@@ -54,15 +64,21 @@
 .writer {
     position: relative;
     top: 40px;
+    color: #cfcfcf;
 }
 
 .font {
+    font-size: 12px;
     position: relative;
     top: 90px;
+    color: #cfcfcf;
 }
 
 .article {
+    font-weight: 100;
+    color: #cfcfcf;
     position: relative;
     top: 120px;
-    font-size: 24px;
+    font-size: 20px;
+    text-align: justify;
 }

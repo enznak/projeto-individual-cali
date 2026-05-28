@@ -23,8 +23,7 @@
             <div class="navbar">
                 <a href="../index.html">HOME</a>
                 <a href="../blog.html">BLOG</a>
-                <a href="../exercicio.html">EXERCÍCIOS</a>
-                <a href="../sobre.html">SOBRE</a>
+                <a href="../sobre.html">SOBRE MIM</a>
             </div>
             <div class="login">
                 <span>Olá, <span id="olausuario" style="color: #7C4DFF;">usuário</span></span>
@@ -46,41 +45,34 @@
                         preencher os indicadores</span></span></h2>
             <div class="dashboard">
                 <div class="card card1">
-                    <div class="kpi-box">Categoria <p>Atleta <span id="kpi_cat">xxxxx</span></p>
+                    <div class="kpi-box">Categoria <p>Atleta <span id="kpi_cat">N/A</span></p>
                     </div>
                 </div>
                 <div class="card card2">
-                    <div class="kpi-box">Classificação atual <p>Nível <span id="kpi_class">xxxxx</span></p>
+                    <div class="kpi-box">Classificação atual <p>Nível <span id="kpi_class">N/A</span></p>
                     </div>
                 </div>
                 <div class="card card3">
-                    <div class="kpi-box">Movimentos desbloqueados <p><span id="kpi_mov">0</span> Ativos</p>
+                    <div class="kpi-box">Movimentos desbloqueados <p><span id="kpi_mov">N/A</span> Ativos</p>
                     </div>
                 </div>
                 <div class="card card4">
                     <div class="chart-box"> <canvas class="chart4" id="myChart"></canvas> </div>
                 </div>
                 <div class="card card5">
-                    <div class=""> Próximas metas <p>Push</p> <span>xxxxx</span>
-                        <p>Pull</p><span>xxxxx</span>
-                        <p>Balance</p><span>xxxxx</span>
+                    <div class=""> Próximas metas <p>Push</p> <span id="kpi_push">N/A</span>
+                        <p>Pull</p><span id="kpi_pull">N/A</span>
+                        <p>Balance</p><span id="kpi_balance">N/A</span>
                     </div>
                 </div>
                 <div class="card card6">
-                    <div class="kpi-box">Quizzes realizados<p><span>0</span></p>
+                    <div class="kpi-box">Acertos (Quizzes de conhecimento)<p><span id="kpi_acertos">N/A</span></p>
                     </div>
                 </div>
                 <div class="card card7">
-                    <div class="kpi-box">Taxa de acerto (quizzes de conhecimento) <p><span>0%</span></p>
+                    <div class="kpi-box">Taxa de acerto (quizzes de conhecimento) <p><span id="kpi_porcacertos">N/A%</span></p>
                     </div>
                 </div>
-                <div class="card card8">
-                    <div class="kpi-box">Tempo de treino<p><span>12 </span>horas semanais <br> <span>2 </span>anos <br>
-                            <span>1248h </span>aproximadamente
-                        </p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -89,7 +81,7 @@
 <script>
     var idUsuario = sessionStorage.ID_USUARIO;
     window.onload = obterDadosGrafico(idUsuario);
-    window.onload = obterDadosKpi(idUsuario);
+    window.onload = obterDadosKpi(idUsuario)
     window.onload = nomeUsuario()
 
     const data = {
@@ -164,14 +156,18 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
+    var pontos_categoria = {}
+    var dados_kpi = ''
+
     function obterDadosGrafico(idUsuario) {
         fetch(`/dashboard/pontos-categoria/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(resposta)
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    myChart.data.datasets[0].data = [resposta.estatico, resposta.dinamico, resposta.carga, resposta.repeticao, resposta.funcional];
-                    myChart.update();
+                    pontos_categoria = resposta
+                    atualizarGrafico()
+                    atualizarKpiCat()
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -180,6 +176,11 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
+    }
+
+    function atualizarGrafico() {
+        myChart.data.datasets[0].data = [pontos_categoria.estatico, pontos_categoria.dinamico, pontos_categoria.carga, pontos_categoria.repeticao, pontos_categoria.funcional];
+        myChart.update();
     }
 
     function obterDadosKpi(idUsuario) {
@@ -188,7 +189,8 @@
                 response.json().then(function (resposta) {
                     console.log(resposta)
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    plotarKpi(resposta, idUsuario);
+                    dados_kpi = resposta
+                    atualizarKpi()
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -199,10 +201,76 @@
             });
     }
 
-    function plotarKpi(resposta, idUsuario) {
-        kpi_cat.innerHTML = resposta
-        kpi_class.innerHTML = resposta
-        kpi_mov.innerHTML = resposta
+    function atualizarKpiCat() {
+        let estatico = Number(pontos_categoria.estatico);
+        let dinamico = Number(pontos_categoria.dinamico);
+        let carga = Number(pontos_categoria.carga);
+        let repeticao = Number(pontos_categoria.repeticao);
+        let funcional = Number(pontos_categoria.funcional);
+
+        let maior_pontos = estatico;
+        let maior_categoria = 'Estático';
+
+        if (dinamico > maior_pontos) {
+            maior_pontos = dinamico;
+            maior_categoria = 'Dinâmico';
+        }
+
+        if (carga > maior_pontos) {
+            maior_pontos = carga;
+            maior_categoria = 'Carga';
+        }
+
+        if (repeticao > maior_pontos) {
+            maior_pontos = repeticao;
+            maior_categoria = 'Repetição';
+        }
+
+        if (funcional > maior_pontos) {
+            maior_pontos = funcional;
+            maior_categoria = 'Funcional';
+        }
+
+        document.getElementById("kpi_cat").innerHTML = maior_categoria;
+    }
+
+    function atualizarKpi() {
+        let kpi_nivel = dados_kpi.nivel.charAt(0).toUpperCase() + dados_kpi.nivel.slice(1);
+        kpi_class.innerHTML = kpi_nivel
+        kpi_mov.innerHTML = dados_kpi.total
+        kpi_acertos.innerHTML = dados_kpi.acertos
+        kpi_porcacertos.innerHTML = Number(dados_kpi.acertos) / (Number(dados_kpi.acertos) + Number(dados_kpi.erros)) * 100 + '%'
+
+        if (dados_kpi.push == 'iniciante') {
+            kpi_push.innerHTML = 'Tuck Planche'
+        } else if (dados_kpi.push == 'intermediario') {
+            kpi_push.innerHTML = 'Straddle Planche'
+        } else if (dados_kpi.push == 'avançado') {
+            kpi_push.innerHTML = 'Full Planche'
+        } else if (dados_kpi.push == 'elite') {
+            kpi_push.innerHTML = 'Maltese'
+        }
+
+        if (dados_kpi.pull == 'iniciante') {
+            kpi_pull.innerHTML = 'Tuck Lever'
+        } else if (dados_kpi.pull == 'intermediario') {
+            kpi_pull.innerHTML = 'Straddle Lever'
+        } else if (dados_kpi.pull == 'avançado') {
+            kpi_pull.innerHTML = 'Full Lever'
+        } else if (dados_kpi.pull == 'elite') {
+            kpi_pull.innerHTML = 'SAT'
+        }
+
+        if (dados_kpi.balance == 'iniciante') {
+            kpi_balance.innerHTML = 'Headstand'
+        } else if (dados_kpi.balance == 'intermediario') {
+            kpi_balance.innerHTML = 'Handstand'
+        } else if (dados_kpi.balance == 'avançado') {
+            kpi_balance.innerHTML = 'One-Arm Handstand'
+        } else if (dados_kpi.balance == 'elite') {
+            kpi_balance.innerHTML = 'One-Arm Flag'
+        }
+
     }
 </script>
 

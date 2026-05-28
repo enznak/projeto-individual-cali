@@ -1,6 +1,6 @@
 .thumb {
     min-height: 60vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)),
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
         url(../img/blogthumb.jpg);
     background-size: cover;
     background-position: center;
@@ -18,7 +18,7 @@
     position: relative;
     background: #171A1F;
     width: 400px;
-    height: 540px;
+    height: 450px;
     top: 50px;
     flex-direction: column;
     box-shadow: 0 0 16px black;
@@ -33,19 +33,34 @@
 .subcard2 {
     display: flex;
     width: calc(100% - 64px);
-    height: 190px;
+    height: 300px;
     padding: 32px;
     flex-direction: column;
     gap: 20px;
 }
 
+.tag {
+    color: #7C4DFF;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
 .subcard2 h1 {
     font-size: 24px;
     color: white;
+    font-weight: 100;
+}
+
+.subcard2 h3 {
+    font-size: 14px;
+    color: white;
+    font-weight: 100;
+    margin-top: -10px;
 }
 
 .subcard2 p {
-    color: white;
+    color: #cfcfcf;
+    line-height: 24px;
 }
 
 .main {
@@ -54,7 +69,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    min-height: 140vh;
+    min-height: 70vh;
 }
 
 .thumb {
@@ -62,9 +77,81 @@
     height: 500px;
 }
 
+.thumb1 {
+    background: url(../img/flag2.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.thumb2 {
+    background: url(../img/fmplanch.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.thumb3 {
+    background: url(../img/flagpole.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.text {
+    display: flex;
+    position: absolute;
+    left: 450px;
+    top: 250px;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.text h1 {
+    color: white;
+    font-size: 70px;
+}
+
+.text h2 {
+    color: #cfcfcf;
+    margin-bottom: 15px;
+    font-size: 22.5px;
+    font-weight: lighter;
+}
+
+.text button {
+    align-self: center;
+    width: 250px;
+    padding: 14px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #7C4DFF;
+    border: 0;
+}
+
+.text button:hover {
+    background-color: #6A3EF0;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.text button:active {
+    background-color: #592FD1;
+}
+
+.text a {
+    text-decoration: none;
+    color: white;
+}
+
 .row {
     display: flex;
-    gap: 50px;
+    gap: 20px;
     justify-content: center;
     align-items: center;
+}
+
+.row a {
+    text-decoration: none;
 }

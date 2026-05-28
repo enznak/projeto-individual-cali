@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <script src="../sessao.js"></script>
+
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="./artigo_style.css">
 </head>
@@ -17,8 +19,7 @@
             <div class="navbar">
                 <a href="../index.html">HOME</a>
                 <a style="color: #6A3EF0;" href="../blog.html">BLOG</a>
-                <a href="../exercicio.html">EXERCÍCIOS</a>
-                <a href="../sobre.html">SOBRE</a>
+                <a href="../sobre.html">SOBRE MIM</a>
             </div>
             <div class="login">
                 <a href="../login.html" id="div_visitante">ENTRAR</a>
@@ -29,21 +30,23 @@
         <div class="main-container">
 
             <div class="main">
-                <h3 class="tags">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
-                <h1 class="title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-                <h3 class="writer">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
-                <img src="" alt="">
+                <h3 class="tags" id="tag">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
+                <h1 class="title" id="titulo">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+                <h3 class="writer" id="subtitulo">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
+                <div class="thumb thumb3"></div>
                 <p class="font">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque iusto totam doloremque ab
                     voluptate
                     eum quod. Saepe exercitationem, consequatur neque tempora officia eius aperiam, commodi modi animi
                     aliquam dolor vel.</p>
-                <p class="article">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur, similique.
+                <p class="article" id="p1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur, similique.
                     Voluptate magnam, vero recusandae omnis pariatur ratione illum accusamus deserunt aperiam aliquam
-                    totam vel quibusdam quo facilis excepturi repudiandae. Sed.</p>
+                    totam vel quibusdam quo facilis excepturi repudiandae. Sed.</p> <br>
 
-                <p class="article">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab molestiae, labore, enim
+                <p class="article" id="p2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab molestiae, labore, enim
                     a cumque deserunt iste tempore ipsam nostrum aperiam eum commodi. Tempore cupiditate laboriosam cum
-                    nulla recusandae itaque accusamus.</p>
+                    nulla recusandae itaque accusamus.</p> <br>
+
+                <p class="article" id="p3"></p>
             </div>
 
         </div>
@@ -70,5 +73,36 @@
         </footer>
     </div>
 </body>
+
+<script>
+    window.onload(buscarArtigos())
+    let artigo = null
+    function buscarArtigos() { 
+        fetch("/blog/buscarArtigos/3", { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(resposta)
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    artigo = resposta
+                    plotarArtigo()
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    
+    function plotarArtigo() {
+        tag.innerHTML = artigo.tag
+        titulo.innerHTML = artigo.titulo
+        subtitulo.innerHTML = artigo.subtitulo
+        p1.innerHTML = artigo.p1
+        p2.innerHTML = artigo.p2
+        p3.innerHTML = artigo.p3
+    }
+</script>
 
 </html>

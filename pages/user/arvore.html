@@ -370,34 +370,40 @@
     }
 
     function redefinir() {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 9; i++) {
             let check = document.getElementById(`push-node${i + 1}`)
             var line = document.getElementById(`push-line${i + 1}`)
             var lab = check.closest('label')
 
             check.checked = false
             lab.classList.remove('active')
-            line.style.display = 'none'
+            if (i < 8) {
+                line.style.display = 'none'
+            }
         }
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 9; i++) {
             let check = document.getElementById(`pull-node${i + 1}`)
             var line = document.getElementById(`pull-line${i + 1}`)
             var lab = check.closest('label')
 
             check.checked = false
             lab.classList.remove('active')
-            line.style.display = 'none'
+            if (i < 8) {
+                line.style.display = 'none'
+            }
         }
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 9; i++) {
             let check = document.getElementById(`balance-node${i + 1}`)
             var line = document.getElementById(`balance-line${i + 1}`)
             var lab = check.closest('label')
 
             check.checked = false
             lab.classList.remove('active')
-            line.style.display = 'none'
+            if (i < 8) {
+                line.style.display = 'none'
+            }
         }
     }
 

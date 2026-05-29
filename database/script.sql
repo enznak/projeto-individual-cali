@@ -51,11 +51,11 @@ create table perguntas (
 );
 
 create table movimentos (
-id int primary key auto_increment,
-nome varchar(45),
-tipo varchar(8),
-categoria varchar(13),
-constraint chkCat check (tipo in('push','pull','balance','dinamico'))
+    id int primary key auto_increment,
+    nome varchar(45),
+    tipo varchar(8),
+    categoria varchar(13),
+    constraint chkCat check (tipo in('push','pull','balance','dinamico'))
 );
 
 create table movimentos_usuario (
@@ -69,122 +69,116 @@ create table movimentos_usuario (
 );
 
 create table artigos (
-id int primary key auto_increment,
-autor int,
-foreign key (autor) references usuarios(id),
-tag varchar(20),
-titulo varchar(100),
-subtitulo varchar(200),
-p1 varchar(1000),
-p2 varchar(1000),
-p3 varchar(1000)
+    id int primary key auto_increment,
+    autor int,
+    foreign key (autor) references usuarios(id),
+    tag varchar(20),
+    titulo varchar(100),
+    subtitulo varchar(200),
+    p1 varchar(1000),
+    p2 varchar(1000),
+    p3 varchar(1000)
 );
 
-CREATE VIEW vw_kpi AS
-SELECT
-    mu.id_usuario AS usuario,
-    SUM(mu.desbloqueado) AS total,
-    
+create view vw_kpi as
+select mu.id_usuario as usuario,
+    sum(mu.desbloqueado) as total,
     (
-        SELECT m2.categoria
-        FROM movimentos_usuario mu2
-        JOIN movimentos m2 ON mu2.id_movimento = m2.id
-        WHERE mu2.id_usuario = usuario
-          AND mu2.desbloqueado = 1
-        ORDER BY
-            CASE m2.categoria
-                WHEN 'iniciante' THEN 1
-                WHEN 'intermediario' THEN 2
-                WHEN 'avançado' THEN 3
-                WHEN 'elite' THEN 4
-                ELSE 0
-            END DESC
-        LIMIT 1
-    ) AS nivel,
+    select m2.categoria
+    from movimentos_usuario mu2
+    join movimentos m2 ON mu2.id_movimento = m2.id
+    where mu2.id_usuario = usuario
+    and mu2.desbloqueado = 1
+    order by
+    case m2.categoria
+    when 'iniciante' then 1
+    when 'intermediario' then 2
+    when 'avançado' then 3
+    when 'elite' then 4
+    else 0
+    end desc
+    limit 1
+    ) as nivel,
     (
-		SELECT m2.categoria
-        FROM movimentos_usuario mu2
-        JOIN movimentos m2 ON mu2.id_movimento = m2.id
-        WHERE mu2.id_usuario = usuario
-          AND mu2.desbloqueado = 1
-          AND m2.tipo = 'push'
-        ORDER BY
-            CASE m2.categoria
-                WHEN 'iniciante' THEN 1
-                WHEN 'intermediario' THEN 2
-                WHEN 'avançado' THEN 3
-                WHEN 'elite' THEN 4
-                ELSE 0
-            END DESC
-        LIMIT 1
-    ) AS push,
+	select m2.categoria
+    from movimentos_usuario mu2
+    join movimentos m2 on mu2.id_movimento = m2.id
+    where mu2.id_usuario = usuario
+    and mu2.desbloqueado = 1
+    and m2.tipo = 'push'
+    order by
+    case m2.categoria
+    when 'iniciante' then 1
+    when 'intermediario' then 2
+    when 'avançado' then 3
+    when 'elite' then 4
+    else 0
+    end desc
+    limit 1
+    ) as push,
     (
-		SELECT m2.categoria
-        FROM movimentos_usuario mu2
-        JOIN movimentos m2 ON mu2.id_movimento = m2.id
-        WHERE mu2.id_usuario = usuario
-          AND mu2.desbloqueado = 1
-          AND m2.tipo = 'pull'
-        ORDER BY
-            CASE m2.categoria
-                WHEN 'iniciante' THEN 1
-                WHEN 'intermediario' THEN 2
-                WHEN 'avançado' THEN 3
-                WHEN 'elite' THEN 4
-                ELSE 0
-            END DESC
-        LIMIT 1
+	select m2.categoria
+    from movimentos_usuario mu2
+    join movimentos m2 ON mu2.id_movimento = m2.id
+    where mu2.id_usuario = usuario
+    and mu2.desbloqueado = 1
+    and m2.tipo = 'pull'
+    order by
+    case m2.categoria
+    when 'iniciante' then 1
+    when 'intermediario' then 2
+    when 'avançado' then 3
+    when 'elite' then 4
+    else 0
+    end desc
+    limit 1
         ) as pull,
 	(
-		SELECT m2.categoria
-        FROM movimentos_usuario mu2
-        JOIN movimentos m2 ON mu2.id_movimento = m2.id
-        WHERE mu2.id_usuario = usuario
-          AND mu2.desbloqueado = 1
-          AND m2.tipo = 'balance'
-        ORDER BY
-            CASE m2.categoria
-                WHEN 'iniciante' THEN 1
-                WHEN 'intermediario' THEN 2
-                WHEN 'avançado' THEN 3
-                WHEN 'elite' THEN 4
-                ELSE 0
-            END DESC
-        LIMIT 1
+	select m2.categoria
+    from movimentos_usuario mu2
+    join movimentos m2 ON mu2.id_movimento = m2.id
+    where mu2.id_usuario = usuario
+    and mu2.desbloqueado = 1
+    and m2.tipo = 'balance'
+    order by
+    case m2.categoria
+    when 'iniciante' then 1
+    when 'intermediario' then 2
+    when 'avançado' then 3
+    when 'elite' then 4
+    else 0
+    end DESC
+    limit 1
     ) as balance,
     (
-		select sum(rq.acertos)
-        from resultados_quiz rq
-        where rq.id_usuario = usuario
+	select sum(rq.acertos)
+    from resultados_quiz rq
+    where rq.id_usuario = usuario
     ) as acertos,
 	(
-		select sum(rq.erros)
-        from resultados_quiz rq
-        where rq.id_usuario = usuario
+	select sum(rq.erros)
+    from resultados_quiz rq
+    where rq.id_usuario = usuario
     ) as erros
-FROM movimentos_usuario mu
-WHERE mu.desbloqueado = 1
-GROUP BY mu.id_usuario;
+from movimentos_usuario mu
+where mu.desbloqueado = 1
+group by mu.id_usuario;
 
-select * from movimentos_usuario where id_usuario = 1;
-
-create view vw_categoria as select id, id_usuario as usuario, estatico, dinamico, carga, repeticao, funcional from pontos_categoria;
-select * from pontos_categoria;
+create view vw_categoria as
+select id,
+id_usuario as usuario,
+estatico,
+dinamico,
+carga,
+repeticao,
+funcional
+from pontos_categoria;
 
 create view vw_movimentos as select id_usuario as usuario, id_movimento as movimento, desbloqueado from movimentos_usuario;
-drop view vw_movimentos;
 
 create view vw_quizperguntas as select id_quiz as quiz, pergunta, opcaoA, opcaoB, opcaoC, opcaoD, opcaoE, correta from perguntas;
-drop view vw_quizperguntas;
 
 create view vw_artigos as select id, autor, tag, titulo, subtitulo, p1, p2, p3 from artigos;
-
-insert into usuarios values
-(default, 'nick', 'nick@gmail.com', 'nicknick123', true);
-select * from usuarios;
-
-insert into pontos_categoria values
-(default, 1,  10, 7, 4, 5, 1);
 
 insert into quizzes values
 (1, 'Categoria', '10 perguntas sobre suas preferências, hábitos e facilidades no treino de calistenia. O resultado revela qual categoria domina sua identidade como atleta.');

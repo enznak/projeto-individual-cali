@@ -7,8 +7,6 @@ O **Arise** é um projeto web interativo que apresenta o universo da calistenia 
 
 O projeto foi desenvolvido com a proposta de criar um website com formulário de cadastro, uso de HTML, CSS, JavaScript e integração com o banco de dados.
 
-A aplicação apresenta a calistenia como uma prática que une força, equilíbrio, liberdade e evolução progressiva. Além de informar, o site também interage com o usuário por meio de quizzes, gráficos e acompanhamento de desempenho, transformando o tema em uma experiência completa.
-
 ## Funcionalidades
 
 - ✅ Página inicial com apresentação da calistenia, benefícios e artigos em destaque.

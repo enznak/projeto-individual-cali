@@ -36,8 +36,6 @@
     font-weight: bold;
 }
 
-.banner:hover {}
-
 .tree-container {
     display: flex;
     flex-direction: column;
@@ -95,11 +93,9 @@
     background-color: #6A3EF0;
 }
 
-.node input[type="checkbox"] {
+.node input {
     display: none;
 }
-
-.node:hover {}
 
 .node.active {
     background-color: #6A3EF0;

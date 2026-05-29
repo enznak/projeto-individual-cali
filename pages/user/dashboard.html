@@ -16,7 +16,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<body>
+<body onload="nomeUsuario()">
     <div class="container">
         <div class="navbar-container">
             <a href="../index.html"><img src="../img/logo_arise.png" alt=""></a>
@@ -82,7 +82,6 @@
     var idUsuario = sessionStorage.ID_USUARIO;
     window.onload = obterDadosGrafico(idUsuario);
     window.onload = obterDadosKpi(idUsuario)
-    window.onload = nomeUsuario()
 
     const data = {
         labels: [
@@ -145,19 +144,8 @@
 
     let myChart = new Chart(ctx, config);
 
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
     var pontos_categoria = {}
-    var dados_kpi = ''
+    var dados_kpi = null
 
     function obterDadosGrafico(idUsuario) {
         fetch(`/dashboard/pontos-categoria/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
@@ -174,7 +162,7 @@
             }
         })
             .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
             });
     }
 
@@ -197,7 +185,7 @@
             }
         })
             .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
             });
     }
 

@@ -16,7 +16,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<body>
+<body onload="nomeUsuario()">
     <div class="container">
         <div class="navbar-container">
             <a href="../index.html"><img src="../img/logo_arise.png" alt=""></a>
@@ -114,8 +114,6 @@
 </body>
 
 <script>
-    window.onload = nomeUsuario()
-
     let listaDePerguntas = []
 
     let pontos_categoria = {
@@ -134,14 +132,6 @@
     let questao_atual = 0
 
     let id_quiz = 0
-
-    function voltarMenu() {
-        window.location.reload()
-    }
-
-    function esconderMenu() {
-        menu.style.display = 'none'
-    }
 
     function iniciarQuiz(idQuiz) {
         id_quiz = idQuiz
@@ -166,13 +156,12 @@
             }
         })
             .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
             });
     }
 
     function listarQuiz(resposta) {
         listaDePerguntas = resposta
-        console.log(resposta)
         preencherQuestaoAtual(0)
     }
 
@@ -240,8 +229,6 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    // crie um atributo que recebe o valor recuperado aqui
-                    // Agora vá para o arquivo routes/usuario.js
                     IDServer: IDVar,
                     estaticoServer: EstaticoVar,
                     dinamicoServer: DinamicoVar,
@@ -255,7 +242,7 @@
 
                     if (resposta.ok) {
                     } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
+                        throw "Houve um erro!";
                     }
                 })
                 .catch(function (resposta) {
@@ -267,23 +254,23 @@
             telaResultado(id_quiz)
 
             let totalPerguntas = conhecimentos.acertos + conhecimentos.erros;
-            let percentual = totalPerguntas > 0 ? Math.round((conhecimentos.acertos / totalPerguntas) * 100) : 0;
+            let percentual = Math.round((conhecimentos.acertos / totalPerguntas) * 100)
 
-            document.getElementById("acertos_quiz2").innerHTML = conhecimentos.acertos;
-            document.getElementById("erros_quiz2").innerHTML = conhecimentos.erros;
-            document.getElementById("total_quiz2").innerHTML = totalPerguntas;
-            document.getElementById("percentual_quiz2").innerHTML = percentual + "%";
+            document.getElementById("acertos_quiz2").innerHTML = conhecimentos.acertos
+            document.getElementById("erros_quiz2").innerHTML = conhecimentos.erros
+            document.getElementById("total_quiz2").innerHTML = totalPerguntas
+            document.getElementById("percentual_quiz2").innerHTML = percentual + "%"
 
             let textoResumo = "";
 
             if (percentual == 100) {
-                textoResumo = "Perfeito! Você acertou todas as questões. Seu conhecimento em calistenia está afiado!";
+                textoResumo = "Perfeito! Você acertou todas as questões. Seu conhecimento em calistenia está afiado!"
             } else if (percentual >= 70) {
-                textoResumo = "Muito bom! Você foi muito bem no quiz, mas ainda dá para lapidar alguns detalhes.";
+                textoResumo = "Muito bom! Você foi muito bem no quiz, mas ainda dá para lapidar alguns detalhes."
             } else if (percentual >= 40) {
-                textoResumo = "Bom começo! Você já tem uma base, mas vale revisar alguns conceitos da modalidade.";
+                textoResumo = "Bom começo! Você já tem uma base, mas vale revisar alguns conceitos da modalidade."
             } else {
-                textoResumo = "Você está começando na jornada. Sem problemas: reveja o conteúdo e tente novamente depois!";
+                textoResumo = "Você está começando na jornada. Sem problemas: reveja o conteúdo e tente novamente depois!"
             }
 
             document.getElementById("texto_resumo_quiz2").innerHTML = textoResumo;
@@ -294,8 +281,6 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    // crie um atributo que recebe o valor recuperado aqui
-                    // Agora vá para o arquivo routes/usuario.js
                     IDServer: IDVar,
                     acertosServer: AcertosVar,
                     errosServer: ErrosVar,
@@ -306,7 +291,7 @@
 
                     if (resposta.ok) {
                     } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
+                        throw "Houve um erro!";
                     }
                 })
                 .catch(function (resposta) {
@@ -357,6 +342,14 @@
             quiz_perguntas.style.display = 'none'
             resultado2.style.display = 'flex'
         }
+    }
+
+    function voltarMenu() {
+        window.location.reload()
+    }
+
+    function esconderMenu() {
+        menu.style.display = 'none'
     }
 
 </script>

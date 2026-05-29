@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arise | Blog de calistenia</title>
 
+    <script type="text/javascript"
+        src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=xxvAKx-s9dPZ3va53-AiysiybXXpX_RPbOuDowHRyfF7_W2w9-yI1ZITOtmJG_F3zPb6XZe9PQjUH_kpqzll7JTaVqHBajNoN7Xm_OJTxc2Tzt6AfZZ_f5klWzPkMWG-LTJip_RBYm1OklEN5Vwsg_Tu0LeU1BkMd2XqSMrDg2wdNneQUqoPJsOtm6Mq5d2JHH4yK-utRej0xe-ggyoUCiUyLExvtvBDRSUNlESUavk"
+        charset="UTF-8"></script>
     <script src="./sessao.js"></script>
 
     <link rel="stylesheet" href="./css/style.css">
@@ -44,9 +47,19 @@
                     <input id="senha_input" type="password" placeholder="Digite sua senha" class="password">
                     <span id="sn_erro0" class="erro"></span>
 
-                    <label>Confirmar a senha</label>
-                    <input id="senha2_input" type="password" placeholder="Digite sua senha novamente" class="password">
-                    <span id="sn2_erro0" class="erro"></span>
+                    <div class="double1">
+                        <div>
+                            <label>Confirmar a senha</label>
+                            <input id="senha2_input" type="password" placeholder="Sua senha novamente"
+                                class="password">
+                            <span id="sn2_erro0" class="erro"></span>
+                        </div>
+                        <div>
+                            <span><label id="desafio_seguranca"></label></span>
+                            <input type="text" id="desafio_input" class="conf" placeholder="Resposta">
+                            <span id="df_erro0" class="erro"></span>
+                        </div>
+                    </div>
 
                     <button type="submit" onclick="; limpar(); validar()">Cadastrar</button>
                     <span class="center">Já possui acesso? <a href="./login.html">Entrar na conta</a></span>
@@ -60,6 +73,10 @@
     </div>
 </body>
 <script>
+    var numeroDesafio = Math.floor(Math.random() * 15) + 1
+    var numeroBinario = numeroDesafio.toString(2)
+    desafio_seguranca.innerHTML = numeroDesafio + ' x 10'
+
     function validar() {
         let form = {
             nm: nome_input.value,
@@ -68,7 +85,16 @@
             sn2: senha2_input.value
         }
 
+        let desafioBinarioVar = desafio_input.value
+
+        let respostaBinario = (Number(desafioBinarioVar) / 10).toString(2)
+
         let erro = false
+        if (respostaBinario != numeroBinario) {
+            erro = true
+            df_erro0.style.display = 'block'
+            df_erro0.innerHTML = 'Valor incorreto'
+        }
         if (form.nm == "" || form.nm.length > 30 || form.nm.length < 3) {
             erro = true
             nm_erro0.style.display = 'block'
@@ -113,15 +139,12 @@
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
-        // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
                 nomeServer: nomeVar,
                 emailServer: emailVar,
                 senhaServer: senhaVar,
@@ -131,11 +154,16 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-                    window.location.href('./login.html')
+                    limpar()
+                    sn2_erro0.style.color = 'green'
+                    sn2_erro0.style.display = 'block'
+                    sn2_erro0.innerHTML = 'Cadastro realizado com sucesso!'
+                    setTimeout(() => {
+                        window.location.href = './login.html'
+                    }, 2000);
                 } else {
                     sn2_erro0.style.display = 'block'
                     sn2_erro0.innerHTML = `Nome de usuário ou e-mail já cadastrado(s).`
-                    throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })
             .catch(function (resposta) {

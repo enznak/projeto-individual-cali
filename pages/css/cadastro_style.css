@@ -116,3 +116,14 @@
     text-align: center;
     color: white;
 }
+
+.double1 {
+    display: flex;
+    margin-top: 24px;
+    max-width: 100%;
+}
+
+.conf {
+    width: 90px;
+    padding-left: 16px !important;
+}

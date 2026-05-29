@@ -171,7 +171,7 @@ select * from movimentos_usuario where id_usuario = 1;
 create view vw_categoria as select id, id_usuario as usuario, estatico, dinamico, carga, repeticao, funcional from pontos_categoria;
 select * from pontos_categoria;
 
-create view vw_movimentos as select id_movimento as movimento, desbloqueado from movimentos_usuario;
+create view vw_movimentos as select id_usuario as usuario, id_movimento as movimento, desbloqueado from movimentos_usuario;
 drop view vw_movimentos;
 
 create view vw_quizperguntas as select id_quiz as quiz, pergunta, opcaoA, opcaoB, opcaoC, opcaoD, opcaoE, correta from perguntas;
